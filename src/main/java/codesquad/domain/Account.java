@@ -1,12 +1,9 @@
 package codesquad.domain;
 
-import lombok.Getter;
 import support.domain.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -29,6 +26,34 @@ public class Account extends AbstractEntity {
 
     @Column(nullable = false)
     private Long type = 1l;
+
+    public Account() {
+    }
+
+
+    public Account(String userId, String password, String name, String email) {
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+    }
+
+    public Account(String userId, String password, String name, String email, Long type) {
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.type = type;
+    }
+
+    public Account(Long id, String userId, String password, String name, String email, Long type) {
+        super(id);
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.type = type;
+    }
 
     public String getUserId() {
         return userId;
