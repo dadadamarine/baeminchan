@@ -30,7 +30,6 @@ public class Account extends AbstractEntity {
     public Account() {
     }
 
-
     public Account(String userId, String password, String name, String email) {
         this.userId = userId;
         this.password = password;
@@ -53,6 +52,10 @@ public class Account extends AbstractEntity {
         this.name = name;
         this.email = email;
         this.type = type;
+    }
+
+    public boolean matchPassword(String targetPassword){
+        return password.equals(targetPassword);
     }
 
     public String getUserId() {
