@@ -24,6 +24,10 @@ public class Account extends AbstractEntity {
     @Column
     private String email;
 
+    @Size(min = 12, max = 13)
+    @Column
+    private String phoneNumber;
+
     @Column(nullable = false)
     private Long type = 1l;
 
@@ -96,5 +100,13 @@ public class Account extends AbstractEntity {
 
     public void setType(Long type) {
         this.type = type;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
