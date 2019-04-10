@@ -36,23 +36,22 @@ var $ = jQuery.noConflict();
 
 
 function fetchManager({url, method, body, headers, callback}) {
-    console.log(body);
-    console.log(url);
-    console.log(method);
-    console.log(headers);
     fetch(url, {
         method,
         body,
         headers,
         credentials: "same-origin"
     }).then((response) => {
-        const data = response.json();
-        return data.then(result =>  {
-            return {
-                'result' : result,
-                'status' : response.status
-            }
-        })
+        console.log(response);
+        //window.location.assign(response.location);
+
+        // const data = response.json();
+        // return data.then(result =>  {
+        //     return {
+        //         'result' : result,
+        //         'status' : response.status
+        //     }
+        // })
     }).then( ({result, status}) => {
         if(status >= 400) {
             console.log('error 가 발생했네요 ', result.error);
