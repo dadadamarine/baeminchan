@@ -37,6 +37,9 @@ var $ = jQuery.noConflict();
 
 function fetchManager({url, method, body, headers, callback}) {
     console.log(body);
+    console.log(url);
+    console.log(method);
+    console.log(headers);
     fetch(url, {
         method,
         body,
@@ -62,20 +65,20 @@ function fetchManager({url, method, body, headers, callback}) {
 }
 
 function sendJoinRequest() {
+    const content ={
+        userId : document.getElementById("email_id").value+ "@" + document.getElementById("email_domain").value,
+        password : document.getElementById("pw1").value,
+        email : document.getElementById("email_id").value+ "@" + document.getElementById("email_domain").value,
+        name : document.getElementById("name").value,
+        phoneNumber:document.getElementById("cell1").value
+            + "-" + document.getElementById("cell2").value
+            + "-" + document.getElementById("cell3").value,
+    };
     fetchManager({
         url: '/member',
         method: 'POST',
-        headers: "application/json; charset=UTF-8",
-        body: JSON.stringify({
-            userId : document.getElementById("email_id").value+ "@" + document.getElementById("email_domain").value,
-            password : document.getElementById("pw1").value,
-            email : document.getElementById("email_id").value+ "@" + document.getElementById("email_domain").value,
-            name : document.getElementById("name").value,
-            phoneNumber:document.getElementById("cell1").value
-                + "-" + document.getElementById("cell2").value
-                + "-" + document.getElementById("cell3").value,
-        }),
-
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(content),
         callback: appendAnswer
     })
     return false;
