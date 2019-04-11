@@ -48,4 +48,24 @@ public abstract class AbstractEntity {
     public String toString() {
         return "AbstractEntity{" + "id=" + id + ", createAt=" + createAt + ", updateAt=" + updateAt + '}';
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
+    }
 }

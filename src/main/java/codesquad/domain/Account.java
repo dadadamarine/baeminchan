@@ -35,10 +35,8 @@ public class Account extends AbstractEntity {
     }
 
     public Account(String userId, String password, String name, String email) {
-        this.userId = userId;
-        this.password = password;
-        this.name = name;
-        this.email = email;
+        this(userId,password,name,email,1L);
+
     }
 
     public Account(String userId, String password, String name, String email, Long type) {

@@ -17,6 +17,7 @@ public class AccountService {
     AccountRepository accountRepository;
 
     public Account save(Account account) {
+        accountRepository.save(account);
         return null;
     }
 }
