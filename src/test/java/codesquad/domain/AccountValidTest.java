@@ -20,7 +20,7 @@ public class AccountValidTest {
     private static Validator validator;
 
     @BeforeClass
-    public void setup() {
+    public static void setup() {
         validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
 

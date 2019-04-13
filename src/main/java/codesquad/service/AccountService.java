@@ -2,6 +2,7 @@ package codesquad.service;
 
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
+import codesquad.web.dto.AccountRegistrationDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,12 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public Account save(Account account) {
-        accountRepository.save(account);
+    public Account save(AccountRegistrationDTO account) {
+        if(account.passwordConfirm()){
+
+        }
+        Account newAcount = new Account(account);
+        accountRepository.save(newAcount);
         return null;
     }
 

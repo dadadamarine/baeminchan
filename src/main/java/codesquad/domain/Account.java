@@ -1,5 +1,6 @@
 package codesquad.domain;
 
+import codesquad.web.dto.AccountRegistrationDTO;
 import support.domain.AbstractEntity;
 
 import javax.persistence.Column;
@@ -53,6 +54,15 @@ public class Account extends AbstractEntity {
         this.name = name;
         this.email = email;
         this.type = type;
+    }
+
+    public Account(AccountRegistrationDTO accountRegistrationDTO) {
+        this.userId = accountRegistrationDTO.getUserId();
+        this.password = accountRegistrationDTO.getPassword();
+        this.name = accountRegistrationDTO.getName();
+        this.email = accountRegistrationDTO.getEmail();
+        this.phoneNumber = accountRegistrationDTO.getPhoneNumber();
+        this.type = accountRegistrationDTO.getType();
     }
 
     public boolean matchPassword(String targetPassword){

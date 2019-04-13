@@ -2,17 +2,17 @@ package codesquad.web.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class AccountDTO {
+public class AccountLoginDTO {
 
     @NotNull String userId;
 
     @NotNull String password;
 
-    public AccountDTO(){
+    public AccountLoginDTO(){
 
     }
 
-    public AccountDTO(String userId, String password) {
+    public AccountLoginDTO(String userId, String password) {
         this.userId = userId;
         this.userId = password;
     }

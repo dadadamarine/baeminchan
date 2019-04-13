@@ -30,11 +30,6 @@ public class AccountRegistrationDTO {
     @NotNull
     private Long type;
 
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public static class Builder{
         // Required parameters(필수 인자)
         private final String userId;
@@ -82,5 +77,40 @@ public class AccountRegistrationDTO {
         phoneNumber = builder.phoneNumber;
         email = builder.email;
         type = builder.type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Long getType() {
+        return type;
+    }
+
+    public boolean passwordConfirm(){
+        if(password.equals(confirmPassword)){
+            return true;
+        }
+        return false;
     }
 }

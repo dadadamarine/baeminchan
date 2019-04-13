@@ -1,8 +1,9 @@
 package codesquad.web;
 
-import codesquad.web.dto.AccountDTO;
+import codesquad.web.dto.AccountLoginDTO;
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
+import codesquad.web.dto.AccountRegistrationDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,34 +32,34 @@ public class AccountAcceptanceTest {
 
     @Test
     public void create() throws Exception {
-        Account account = new Account(2L, "test@google.com", "!Password1234", "testname", "test@gmail.com",1L);
+        AccountRegistrationDTO account = new AccountRegistrationDTO.Builder("test1@google.com", "!Password1234", "!Password1234", "name").build();
         ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        assertThat(accountRepository.findById(account.getId())).isNotEmpty();
+        assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(true);
     }
 
     @Test
     public void createWithInvalidPassword() throws Exception {
-        Account account = new Account(3L, "test@google.com", "password", "testname", "test@gmail.com",1L);
+        AccountRegistrationDTO account = new AccountRegistrationDTO.Builder("test2@google.com", "!Password", "!Password1234", "name").build();
         ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(accountRepository.findById(account.getId())).isEmpty();
+        assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(false);
     }
 
     @Test
-    public void createWithInvalidId() throws Exception {
+    public void createWithInvalidUserId() throws Exception {
         Account account = new Account(3L, "t", "password", "testname", "test@gmail.com",1L);
         ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(accountRepository.findById(account.getId())).isEmpty();
+        assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(false);
     }
 
     @Test
     public void login() throws Exception {
-        AccountDTO account = new AccountDTO("test@google.com", "!Password1234");
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Password1234");
         ResponseEntity<String> response = template.postForEntity("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -67,7 +68,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void loginWithNotFoundAccount() throws Exception {
-        AccountDTO account = new AccountDTO("testes@google.com", "!Password1234");
+        AccountLoginDTO account = new AccountLoginDTO("testes@google.com", "!Password1234");
         ResponseEntity<String> response = template.postForEntity("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
@@ -76,7 +77,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void loginWithUnmatchPassword() throws Exception {
-        AccountDTO account = new AccountDTO("test@google.com", "loginpassword");
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "loginpassword");
         ResponseEntity<String> response = template.postForEntity("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
