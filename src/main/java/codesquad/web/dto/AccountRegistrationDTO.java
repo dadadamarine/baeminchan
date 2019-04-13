@@ -4,6 +4,7 @@ import codesquad.constraint.ValidPassword;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class AccountRegistrationDTO {
 
@@ -26,7 +27,7 @@ public class AccountRegistrationDTO {
     @Email
     private String email;
 
-    @NotEmpty
+    @NotNull
     private Long type;
 
 
