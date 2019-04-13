@@ -1,6 +1,6 @@
 package codesquad.util;
 
 public class SessionUtils {
-    //TODO : 세션 기능 구현
+    public static final String USER_SESSION_KEY = "sessionedUser";
 
 }

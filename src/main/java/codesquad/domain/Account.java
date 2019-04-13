@@ -1,6 +1,7 @@
 package codesquad.domain;
 
 import codesquad.web.dto.AccountRegistrationDTO;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import support.domain.AbstractEntity;
 
 import javax.persistence.Column;
@@ -29,17 +30,17 @@ public class Account extends AbstractEntity {
     private String phoneNumber;
 
     @Column(nullable = false)
-    private Long type = 1l;
+    private MemberType type = MemberType.MEMBER;
 
     public Account() {
     }
 
     public Account(String userId, String password, String name, String email) {
-        this(userId,password,name,email,1L);
+        this(userId,password,name,email, MemberType.MEMBER);
 
     }
 
-    public Account(String userId, String password, String name, String email, Long type) {
+    public Account(String userId, String password, String name, String email, MemberType type) {
         this.userId = userId;
         this.password = password;
         this.name = name;
@@ -47,7 +48,7 @@ public class Account extends AbstractEntity {
         this.type = type;
     }
 
-    public Account(Long id, String userId, String password, String name, String email, Long type) {
+    public Account(Long id, String userId, String password, String name, String email, MemberType type) {
         super(id);
         this.userId = userId;
         this.password = password;
@@ -101,11 +102,11 @@ public class Account extends AbstractEntity {
         this.email = email;
     }
 
-    public Long getType() {
+    public MemberType getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(MemberType type) {
         this.type = type;
     }
 
@@ -115,5 +116,10 @@ public class Account extends AbstractEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Account encode(PasswordEncoder passwordEncoder) {
+        password = passwordEncoder.encode(password);
+        return this;
     }
 }

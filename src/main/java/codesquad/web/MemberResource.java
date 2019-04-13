@@ -1,7 +1,11 @@
 package codesquad.web;
 
+import codesquad.exception.UnAuthenticationException;
 import codesquad.service.AccountService;
+import codesquad.util.SessionUtils;
+import codesquad.web.dto.AccountLoginDTO;
 import codesquad.web.dto.AccountRegistrationDTO;
+import com.sun.jndi.toolkit.url.Uri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -28,12 +33,24 @@ public class MemberResource {
     @PostMapping("")
     public ResponseEntity<Void> createMember(@Valid @RequestBody AccountRegistrationDTO account) {
         accountService.save(account);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/login.html"));
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return makeDefaultResponseEntity("/login.html", HttpStatus.CREATED);
     }
 
-    //TODO : controllerAdvice동반한 컨트롤러 테스트 구현
+    @PostMapping("/login")
+    public ResponseEntity<Void> login(HttpSession session
+            , @Valid @RequestBody AccountLoginDTO accountLoginDTO){
+        try {
+            session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
+        } catch (UnAuthenticationException e) {
+            return makeDefaultResponseEntity("member/login", HttpStatus.NOT_FOUND);
+        }
+        return  makeDefaultResponseEntity("/", HttpStatus.OK);
+    }
 
+    public ResponseEntity<Void> makeDefaultResponseEntity(String uri, HttpStatus httpStatus){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create(uri));
+        return new ResponseEntity<>(headers, httpStatus);
+    }
 
 }

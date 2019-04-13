@@ -1,5 +1,6 @@
 package codesquad.web;
 
+import codesquad.domain.MemberType;
 import codesquad.web.dto.AccountLoginDTO;
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
@@ -50,7 +51,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void createWithInvalidUserId() throws Exception {
-        Account account = new Account(3L, "t", "password", "testname", "test@gmail.com",1L);
+        Account account = new Account(3L, "t", "password", "testname", "test@gmail.com", MemberType.MEMBER);
         ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);

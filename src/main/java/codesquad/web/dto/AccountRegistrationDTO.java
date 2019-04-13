@@ -1,6 +1,7 @@
 package codesquad.web.dto;
 
 import codesquad.constraint.ValidPassword;
+import codesquad.domain.MemberType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -28,7 +29,7 @@ public class AccountRegistrationDTO {
     private String email;
 
     @NotNull
-    private Long type;
+    private MemberType type;
 
     public static class Builder{
         // Required parameters(필수 인자)
@@ -40,7 +41,7 @@ public class AccountRegistrationDTO {
         // Optional parameters
         private String phoneNumber;
         private String email;
-        private Long type = 1l;
+        private MemberType type = MemberType.MEMBER;
 
         public Builder(String userId, String password, String confirmPassword, String name) {
             this.userId = userId;
@@ -59,8 +60,8 @@ public class AccountRegistrationDTO {
             return this;
         }
 
-        public Builder type(Long value){
-            type = value;
+        public Builder type(MemberType memberType){
+            type = memberType;
             return this;
         }
 
@@ -103,7 +104,7 @@ public class AccountRegistrationDTO {
         return email;
     }
 
-    public Long getType() {
+    public MemberType getType() {
         return type;
     }
 
