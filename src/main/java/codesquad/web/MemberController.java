@@ -1,4 +1,4 @@
-package codesquad.controller;
+package codesquad.web;
 
 import codesquad.domain.Account;
 import codesquad.service.AccountService;
@@ -32,6 +32,8 @@ public class MemberController {
         headers.setLocation(URI.create("/login.html"));
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+
+    //TODO : controllerAdvice동반한 컨트롤러 테스트 구현
 
 
 }

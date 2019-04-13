@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 @EnableJpaAuditing
 @ComponentScan({"codesquad", "support"})
 public class BaeminchanApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(BaeminchanApplication.class, args);
     }
+
 }

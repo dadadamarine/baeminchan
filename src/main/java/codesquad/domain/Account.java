@@ -13,7 +13,6 @@ public class Account extends AbstractEntity {
     @Column(unique = true, nullable = false)
     private String userId;
 
-    @Size(min = 6, max = 20)
     @Column(nullable = false)
     private String password;
 

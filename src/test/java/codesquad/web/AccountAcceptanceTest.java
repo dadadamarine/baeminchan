@@ -1,10 +1,9 @@
 package codesquad.web;
 
-import codesquad.controller.dto.AccountDto;
+import codesquad.web.dto.AccountDTO;
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class AccountAcceptanceTest {
     private AccountRepository accountRepository;
     @Before
     public void test(){
-
+        accountRepository.findAll();
     }
 
     @Test
@@ -40,8 +39,17 @@ public class AccountAcceptanceTest {
     }
 
     @Test
+    public void createWithInvalid() throws Exception {
+        Account account = new Account(2L, "test@google.com", "password", "testname", "test@gmail.com",1L);
+        ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(accountRepository.findById(account.getId())).isNotEmpty();
+    }
+
+    @Test
     public void login() throws Exception {
-        AccountDto account = new AccountDto("test@google.com", "password");
+        AccountDTO account = new AccountDTO("test@google.com", "password");
         ResponseEntity<String> response = template.postForEntity("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
