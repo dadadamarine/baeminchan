@@ -16,9 +16,4 @@ public class PageController {
         return "join";
     }
 
-    @GetMapping("/member/login")
-    public String loginForm2() {
-        return "login";
-    }
-
 }

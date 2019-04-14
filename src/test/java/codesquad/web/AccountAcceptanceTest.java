@@ -1,11 +1,8 @@
 package codesquad.web;
 
-import codesquad.domain.MemberType;
 import codesquad.web.dto.AccountLoginDTO;
-import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
 import codesquad.web.dto.AccountRegistrationDTO;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +27,7 @@ public class AccountAcceptanceTest {
     public void create() throws Exception {
         AccountRegistrationDTO account = new AccountRegistrationDTO.Builder("test1@google.com", "!Password1234", "!Password1234", "name").build();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity entity = new HttpEntity(account, headers);
-        ResponseEntity<String> response = template.postForEntity("/member", entity, String.class );
+        ResponseEntity<String> response = sendPost("/member",account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(true);
@@ -42,7 +36,7 @@ public class AccountAcceptanceTest {
     @Test
     public void createWithInvalidPassword() throws Exception {
         AccountRegistrationDTO account = new AccountRegistrationDTO.Builder("test2@google.com", "!Password", "!Password1234", "name").build();
-        ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
+        ResponseEntity<String> response = sendPost("/member", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(false);
@@ -50,8 +44,8 @@ public class AccountAcceptanceTest {
 
     @Test
     public void createWithInvalidUserId() throws Exception {
-        Account account = new Account(3L, "t", "password", "testname", "test@gmail.com", MemberType.MEMBER);
-        ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
+        AccountRegistrationDTO account = new AccountRegistrationDTO.Builder( "t", "!Password1234", "!Password1234", "test@gmail.com").build();
+        ResponseEntity<String> response = sendPost("/member", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(false);
@@ -59,11 +53,8 @@ public class AccountAcceptanceTest {
 
     @Test
     public void login() throws Exception {
-        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Password1234");
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity entity = new HttpEntity(account, headers);
-        ResponseEntity<Void> response = template.exchange("/member/login", HttpMethod.POST, entity, Void.class);
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Test1234");
+        ResponseEntity<Void> response = sendPost("/member/login", account, Void.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/");
@@ -71,19 +62,39 @@ public class AccountAcceptanceTest {
 
     @Test
     public void loginWithNotFoundAccount() throws Exception {
-        AccountLoginDTO account = new AccountLoginDTO("testes@google.com", "!Password1234");
-        ResponseEntity<String> response = template.postForEntity("/member/login", account, String.class);
+        AccountLoginDTO account = new AccountLoginDTO("testes@google.com", "!Test1234");
+        ResponseEntity<String> response = sendPost("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/login");
+        assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("member/login");
     }
 
     @Test
     public void loginWithUnmatchPassword() throws Exception {
-        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "loginpassword");
-        ResponseEntity<String> response = template.postForEntity("/member/login", account, String.class);
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Test12345");
+        ResponseEntity<String> response =sendPost("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/login");
+        assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("member/login");
     }
+
+    @Test
+    public void loginWithInvalidPassword() throws Exception {
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!test12345");
+        ResponseEntity<String> response =sendPost("/member/login", account, String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("member/login");
+    }
+
+    public <T> ResponseEntity<T> sendPost(String uri, Object object, Class<T> responseType) {
+        return template.exchange(uri, HttpMethod.POST, createHttpEntity(object), responseType);
+    }
+
+    public HttpEntity createHttpEntity(Object object) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new HttpEntity<>(object, headers);
+    }
+
 }

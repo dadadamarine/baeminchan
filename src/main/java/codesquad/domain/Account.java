@@ -6,6 +6,8 @@ import support.domain.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -30,6 +32,7 @@ public class Account extends AbstractEntity {
     private String phoneNumber;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MemberType type = MemberType.MEMBER;
 
     public Account() {

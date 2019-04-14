@@ -3,7 +3,6 @@ package codesquad.web.dto;
 import codesquad.constraint.ValidPassword;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 public class AccountLoginDTO {
 
@@ -11,15 +10,16 @@ public class AccountLoginDTO {
     String userId;
 
     @NotEmpty
+    @ValidPassword
     String password;
 
-    public AccountLoginDTO(){
+    public AccountLoginDTO() {
 
     }
 
     public AccountLoginDTO(String userId, String password) {
         this.userId = userId;
-        this.userId = password;
+        this.password = password;
     }
 
     public String getUserId() {

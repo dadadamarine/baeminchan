@@ -32,9 +32,9 @@ public class AccountService {
     }
 
     public Account findAccount(AccountLoginDTO accountLoginDTO) throws UnAuthenticationException {
-        String encodedPassword = passwordEncoder.encode(accountLoginDTO.getPassword());
+//        String encodedPassword = passwordEncoder.encode(accountLoginDTO.getPassword());
         return accountRepository.findByUserId(accountLoginDTO.getUserId())
-                .filter(account -> account.matchPassword(encodedPassword))
+                .filter(account -> passwordEncoder.matches(accountLoginDTO.getPassword(),account.getPassword()))
                 .orElseThrow(UnAuthenticationException::new);
     }
 }
