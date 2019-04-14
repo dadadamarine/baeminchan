@@ -1,6 +1,5 @@
 package codesquad.domain;
 
-import org.h2.engine.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -31,7 +30,7 @@ public class AccountValidTest {
         assertThat(constraintViolations.size()).isEqualTo(1);
 
         for (ConstraintViolation<Account> constraintViolation : constraintViolations) {
-            log.debug("violation error message : {}" , constraintViolation.getMessage());
+            log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }
 }

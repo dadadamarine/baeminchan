@@ -14,7 +14,6 @@ public class AccountLoginDTO {
     String password;
 
     public AccountLoginDTO() {
-
     }
 
     public AccountLoginDTO(String userId, String password) {

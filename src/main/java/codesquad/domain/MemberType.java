@@ -1,5 +1,5 @@
 package codesquad.domain;
 
 public enum MemberType {
-    MEMBER, MANAGER;
+    MEMBER, MANAGER
 }

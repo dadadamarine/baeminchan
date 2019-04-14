@@ -1,6 +1,5 @@
 package codesquad.domain;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,14 @@ public class AccountRepositoryTest {
     AccountRepository accountRepository;
 
     @Test
-    public void saveTest(){
+    public void saveTest() {
         Account account = new Account("test1@google.com", "!Password1234", "자바지기", "dadadamared@ng.com");
         accountRepository.save(account);
         assertThat(accountRepository.findAll().size()).isEqualTo(2);
     }
 
     @Test
-    public void findByUserIdTest(){
+    public void findByUserIdTest() {
         assertThat(accountRepository.findByUserId("test@google.com").get().getPassword()).isEqualTo("!Password1234");
     }
 }

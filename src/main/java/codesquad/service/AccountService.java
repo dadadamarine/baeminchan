@@ -25,16 +25,15 @@ public class AccountService {
     PasswordEncoder passwordEncoder;
 
     public Account save(AccountRegistrationDTO dto) {
-        if(!dto.passwordConfirm()){
+        if (!dto.passwordConfirm()) {
             throw new CannotJoinException("unmatch password");
         }
         return accountRepository.save(new Account(dto).encode(passwordEncoder));
     }
 
     public Account findAccount(AccountLoginDTO accountLoginDTO) throws UnAuthenticationException {
-//        String encodedPassword = passwordEncoder.encode(accountLoginDTO.getPassword());
         return accountRepository.findByUserId(accountLoginDTO.getUserId())
-                .filter(account -> passwordEncoder.matches(accountLoginDTO.getPassword(),account.getPassword()))
+                .filter(account -> passwordEncoder.matches(accountLoginDTO.getPassword(), account.getPassword()))
                 .orElseThrow(UnAuthenticationException::new);
     }
 }

@@ -39,7 +39,7 @@ public class Account extends AbstractEntity {
     }
 
     public Account(String userId, String password, String name, String email) {
-        this(userId,password,name,email, MemberType.MEMBER);
+        this(userId, password, name, email, MemberType.MEMBER);
 
     }
 
@@ -69,7 +69,7 @@ public class Account extends AbstractEntity {
         this.type = accountRegistrationDTO.getType();
     }
 
-    public boolean matchPassword(String targetPassword){
+    public boolean matchPassword(String targetPassword) {
         return password.equals(targetPassword);
     }
 

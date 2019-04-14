@@ -1,6 +1,5 @@
 package codesquad.constraint;
 
-import codesquad.domain.Account;
 import codesquad.web.dto.AccountRegistrationDTO;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,7 +51,7 @@ public class PasswordConstraintValidatorTest {
         assertThat(constraintViolations.size()).isEqualTo(1);
 
         for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
-            log.debug("violation error message : {}" , constraintViolation.getMessage());
+            log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }
 
@@ -70,7 +69,7 @@ public class PasswordConstraintValidatorTest {
         assertThat(constraintViolations.size()).isEqualTo(1);
 
         for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
-            log.debug("violation error message : {}" , constraintViolation.getMessage());
+            log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }
 }

@@ -5,7 +5,6 @@ import codesquad.service.AccountService;
 import codesquad.util.SessionUtils;
 import codesquad.web.dto.AccountLoginDTO;
 import codesquad.web.dto.AccountRegistrationDTO;
-import com.sun.jndi.toolkit.url.Uri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +36,17 @@ public class MemberResource {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(HttpSession session
-            , @Valid @RequestBody AccountLoginDTO accountLoginDTO){
-        //TODO : 이 valid 에서 걸러져서 badrequest나감,  즉 request에서 RequestBody 매핑이 안되었음.
+    public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLoginDTO accountLoginDTO) {
         log.debug("login 포스트가 전달 되어 함수가 실행됨.");
         try {
             session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
         } catch (UnAuthenticationException e) {
             return makeDefaultResponseEntity("member/login", HttpStatus.NOT_FOUND);
         }
-        return  makeDefaultResponseEntity("/", HttpStatus.OK);
+        return makeDefaultResponseEntity("/", HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> makeDefaultResponseEntity(String uri, HttpStatus httpStatus){
+    public ResponseEntity<Void> makeDefaultResponseEntity(String uri, HttpStatus httpStatus) {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create(uri));
         return new ResponseEntity<>(headers, httpStatus);

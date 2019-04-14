@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class AccountRegistrationDTO {
 
     @NotEmpty
-    private String userId;
+    private final String userId;
 
     @NotEmpty
     @ValidPassword
@@ -30,15 +30,13 @@ public class AccountRegistrationDTO {
 
     @NotNull
     private MemberType type;
-
-    public static class Builder{
-        // Required parameters(필수 인자)
+    
+    public static class Builder {
         private final String userId;
         private final String password;
         private final String confirmPassword;
         private final String name;
 
-        // Optional parameters
         private String phoneNumber;
         private String email;
         private MemberType type = MemberType.MEMBER;
@@ -50,27 +48,27 @@ public class AccountRegistrationDTO {
             this.name = name;
         }
 
-        public Builder phoneNumber(String value){
+        public Builder phoneNumber(String value) {
             phoneNumber = value;
             return this;
         }
 
-        public Builder email(String value){
+        public Builder email(String value) {
             email = value;
             return this;
         }
 
-        public Builder type(MemberType memberType){
+        public Builder type(MemberType memberType) {
             type = memberType;
             return this;
         }
 
-        public AccountRegistrationDTO build(){
+        public AccountRegistrationDTO build() {
             return new AccountRegistrationDTO(this);
         }
     }
 
-    private AccountRegistrationDTO(Builder builder){
+    private AccountRegistrationDTO(Builder builder) {
         userId = builder.userId;
         password = builder.password;
         confirmPassword = builder.confirmPassword;
@@ -108,8 +106,8 @@ public class AccountRegistrationDTO {
         return type;
     }
 
-    public boolean passwordConfirm(){
-        if(password.equals(confirmPassword)){
+    public boolean passwordConfirm() {
+        if (password.equals(confirmPassword)) {
             return true;
         }
         return false;

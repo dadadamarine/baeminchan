@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
@@ -28,11 +29,21 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler(CannotJoinException.class)
-    public final ResponseEntity<Object> handleCannotJoinException(CannotJoinException ex , WebRequest request){
+    public final ResponseEntity<Object> handleCannotJoinException(CannotJoinException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 LocalDateTime.now(),
                 ex.getMessage(),
                 request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ConstraintViolationException.class})
+    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(
+                        LocalDateTime.now(),
+                        ex.getMessage(),
+                        request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
