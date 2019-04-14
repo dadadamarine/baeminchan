@@ -2,15 +2,15 @@ package codesquad.web.dto;
 
 import codesquad.constraint.ValidPassword;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class AccountLoginDTO {
 
-    @NotNull
+    @NotEmpty
     String userId;
 
-    @NotNull
-    @ValidPassword
+    @NotEmpty
     String password;
 
     public AccountLoginDTO(){

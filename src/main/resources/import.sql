@@ -1,1 +1,1 @@
--- INSERT INTO user (id, user_id, password, name, email, phone_number, type, create_at) values (1, 'test@google.com', 'password', '자바지기', 'javajigi@slipp.net', '010-1111-1111', 1 , CURRENT_TIMESTAMP());
+INSERT INTO account (id, user_id, password, name, email, phone_number, type ,create_at) values (1l, 'test@google.com', '!Password1234', '자바지기', 'javajigi@slipp.net', '010-1111-1111', 0, CURRENT_TIMESTAMP());

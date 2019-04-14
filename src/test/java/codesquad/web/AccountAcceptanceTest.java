@@ -11,8 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,15 +25,15 @@ public class AccountAcceptanceTest {
 
     @Autowired
     private AccountRepository accountRepository;
-    @Before
-    public void test(){
-        accountRepository.findAll();
-    }
 
     @Test
     public void create() throws Exception {
         AccountRegistrationDTO account = new AccountRegistrationDTO.Builder("test1@google.com", "!Password1234", "!Password1234", "name").build();
-        ResponseEntity<String> response = template.postForEntity("/member",account, String.class);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity entity = new HttpEntity(account, headers);
+        ResponseEntity<String> response = template.postForEntity("/member", entity, String.class );
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(true);
@@ -61,7 +60,10 @@ public class AccountAcceptanceTest {
     @Test
     public void login() throws Exception {
         AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Password1234");
-        ResponseEntity<String> response = template.postForEntity("/member/login", account, String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity entity = new HttpEntity(account, headers);
+        ResponseEntity<Void> response = template.exchange("/member/login", HttpMethod.POST, entity, Void.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/");
