@@ -8,3 +8,72 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 코드스쿼드의 온라인 코드 리뷰 과정](https://github.com/code-squad/codesquad-docs/blob/master/codereview/README.md)
 * [동영상으로 살펴보는 코드스쿼드의 온라인 코드 리뷰 과정](https://youtu.be/a5c9ku-_fok)
+
+# 학습내용
+
+## spring security 인증범위 설정
+- https://gs.saro.me/dev?page=20&tn=480
+
+## 동기화
+- synchronized 의 동작방식, 동기화 블럭, 예제 
+    - https://tourspace.tistory.com/54
+    
+## validation
+- 커스텀 password validation annotation 만들기
+    - https://memorynotfound.com/custom-password-constraint-validator-annotation/ 
+    
+- 자바의 커스텀 어노테이션 생성을 위한 메타 어노테이션 설명
+    - https://jdm.kr/blog/216
+    
+## enum 
+- entity필드 값으로 사용하기
+    - http://woowabros.github.io/tools/2017/07/10/java-enum-uses.html 
+    
+- enumerated
+    - http://tomee.apache.org/examples-trunk/jpa-enumerated/
+   
+## HttpMessageConverter
+- 설명과 컨버터의 종류
+    - https://yoojh9.github.io/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-HttpMessageConverter/
+    - https://devbox.tistory.com/entry/Spring-RequestBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EA%B3%BC-ReponseBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EC%9D%98-%EC%82%AC%EC%9A%A9 
+    
+- @ResponseBody, @RequestBody
+    - https://jongmin92.github.io/2018/03/02/Spring/spring-requestbody-responsebody/
+    - https://lee-mandu.tistory.com/242
+
+## Jackson 라이브러리
+- Jackson에 대한 이해
+    - https://mommoo.tistory.com/83
+- Jackson으로 컨버팅해서 만드는 DTO에 no args constructor이 필요한 이유에 대한 설명 
+
+    - https://manosnikolaidis.wordpress.com/2015/08/25/jackson-without-annotations/
+    - ~~이 글은 나도 다시보고 이해해야겠다.~~
+
+    
+## RestTemplate
+- TestRestTemplate을 이용한 Rest서비 통합테스트 구현
+    - http://blog.saltfactory.net/using-resttemplate-in-spring/ 
+    
+- RestTemplate의 HttpEntity<T> 객체 이해
+    - https://docs.spring.io/spring-framework/docs/5.1.6.RELEASE/javadoc-api/org/springframework/http/HttpEntity.html
+
+## Spring 기본
+- 서블릿 컨테이너의 개념 및 웹 동작의 구조
+    - https://minwan1.github.io/2017/10/08/2017-10-08-Spring-Container,Servlet-Container/
+
+# Javascript 
+
+## JS문법
+- 객체 초기자 {} 사용법
+    - https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer
+ 
+## ajax
+- JSON.stringify
+    - https://babolsk.tistory.com/1067 
+    
+- ajax 크게 설명
+    - https://poiemaweb.com/js-ajax 
+    
+- ajax fetch 설명
+    - https://gs.saro.me/dev?tn=564
+    
