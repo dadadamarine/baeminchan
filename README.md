@@ -61,6 +61,12 @@
 - 서블릿 컨테이너의 개념 및 웹 동작의 구조
     - https://minwan1.github.io/2017/10/08/2017-10-08-Spring-Container,Servlet-Container/
 
+## SLF4J
+- SLF4J를 사용해야 하는 이유
+    - https://inyl.github.io/programming/2017/05/05/slf4j.html
+- 로깅 전략
+
+
 # Javascript 
 
 ## JS문법
@@ -68,6 +74,9 @@
     - https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer
  
 ## ajax
+- http Head content-type의 의미
+    - https://github.com/HomoEfficio/dev-tips/blob/master/Request%20Body%EB%A1%9C%20%EB%B3%B4%EB%82%B4%EC%A7%80%EB%8A%94%20JSON%EC%9D%98%20%ED%96%89%EB%B0%A9%20%EB%B6%88%EB%AA%85.md 
+    
 - JSON.stringify
     - https://babolsk.tistory.com/1067 
     

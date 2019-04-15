@@ -2,7 +2,7 @@ package codesquad.service;
 
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
-import codesquad.exception.CannotJoinException;
+import codesquad.exception.account.CannotJoinException;
 import codesquad.web.dto.AccountRegistrationDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,9 +49,6 @@ public class AccountServiceTest {
     public void save_unmatch_password_test() {
         AccountRegistrationDTO accountRegistrationDTO =
                 new AccountRegistrationDTO.Builder(TEST_USERID, TEST_PASSWORD, "!Ttest1234", "testname").build();
-        Account account = new Account(accountRegistrationDTO);
-        when(accountRepository.save(account)).thenReturn(account);
-        when(passwordEncoder.encode(account.getPassword())).thenReturn(ENCODED_PASSWORD);
 
         Account savedAccount = accountService.save(accountRegistrationDTO);
     }

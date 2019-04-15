@@ -1,6 +1,6 @@
 package codesquad.web;
 
-import codesquad.exception.UnAuthenticationException;
+import codesquad.exception.account.UnAuthenticationException;
 import codesquad.service.AccountService;
 import codesquad.util.SessionUtils;
 import codesquad.web.dto.AccountLoginDTO;
@@ -22,9 +22,9 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/member")
-public class MemberResource {
+public class ApiMemberController {
 
-    private static final Logger log = LoggerFactory.getLogger(MemberResource.class);
+    private static final Logger log = LoggerFactory.getLogger(ApiMemberController.class);
 
     @Autowired
     AccountService accountService;
@@ -37,11 +37,7 @@ public class MemberResource {
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLoginDTO accountLoginDTO) {
-        try {
-            session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
-        } catch (UnAuthenticationException e) {
-            return makeDefaultResponseEntity("member/login", HttpStatus.NOT_FOUND);
-        }
+        session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
         return makeDefaultResponseEntity("/", HttpStatus.OK);
     }
 

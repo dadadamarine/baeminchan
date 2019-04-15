@@ -2,8 +2,8 @@ package codesquad.service;
 
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
-import codesquad.exception.CannotJoinException;
-import codesquad.exception.UnAuthenticationException;
+import codesquad.exception.account.CannotJoinException;
+import codesquad.exception.account.UnAuthenticationException;
 import codesquad.web.dto.AccountLoginDTO;
 import codesquad.web.dto.AccountRegistrationDTO;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class AccountService {
         return accountRepository.save(new Account(dto).encode(passwordEncoder));
     }
 
-    public Account findAccount(AccountLoginDTO accountLoginDTO) throws UnAuthenticationException {
+    public Account findAccount(AccountLoginDTO accountLoginDTO){
         return accountRepository.findByUserId(accountLoginDTO.getUserId())
                 .filter(account -> passwordEncoder.matches(accountLoginDTO.getPassword(), account.getPassword()))
                 .orElseThrow(UnAuthenticationException::new);

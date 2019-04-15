@@ -1,4 +1,4 @@
-package codesquad.exception;
+package codesquad.exception.account;
 
 public class CannotJoinException extends RuntimeException{
 
