@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountService {
 
-    private static Logger log = LoggerFactory.getLogger(AccountService.class);
-
     @Autowired
     AccountRepository accountRepository;
 
@@ -31,7 +29,7 @@ public class AccountService {
         return accountRepository.save(new Account(dto).encode(passwordEncoder));
     }
 
-    public Account findAccount(AccountLogin accountLogin){
+    public Account findAccount(AccountLogin accountLogin) {
         return accountRepository.findByUserId(accountLogin.getUserId())
                 .filter(account -> passwordEncoder.matches(accountLogin.getPassword(), account.getPassword()))
                 .orElseThrow(UnAuthenticationException::new);

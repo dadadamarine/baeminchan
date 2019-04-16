@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -50,6 +52,12 @@ public class ExceptionResponseEntityExceptionHandler {
         headers.setLocation(URI.create("member/login"));
         log.debug("UnAuthenticationException is happened!");
         return new ResponseEntity<>(exceptionResponse, headers, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public void emptyResultData() {
+        log.debug("EntityNotFoundException is happened!");
     }
 
 }
