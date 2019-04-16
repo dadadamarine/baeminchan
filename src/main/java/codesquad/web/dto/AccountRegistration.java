@@ -1,31 +1,31 @@
 package codesquad.web.dto;
 
-import codesquad.constraint.ValidPassword;
 import codesquad.domain.MemberType;
+import lombok.Getter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
-public class AccountRegistrationDTO {
+@Getter
+public class AccountRegistration {
 
-    @NotEmpty
-    private final String userId;
+    @NotBlank
+    @Email
+    private String userId;
 
-    @NotEmpty
-    @ValidPassword
+    @NotBlank
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$")
     private String password;
 
-    @NotEmpty
-    @ValidPassword
+    @NotBlank
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$")
     private String confirmPassword;
 
-    @NotEmpty
+    @NotBlank
     private String name;
 
     private String phoneNumber;
 
-    @Email
+    @NotBlank
     private String email;
 
     @NotNull
@@ -63,12 +63,15 @@ public class AccountRegistrationDTO {
             return this;
         }
 
-        public AccountRegistrationDTO build() {
-            return new AccountRegistrationDTO(this);
+        public AccountRegistration build() {
+            return new AccountRegistration(this);
         }
     }
 
-    private AccountRegistrationDTO(Builder builder) {
+    public AccountRegistration() {
+    }
+
+    private AccountRegistration(Builder builder) {
         userId = builder.userId;
         password = builder.password;
         confirmPassword = builder.confirmPassword;
@@ -76,34 +79,6 @@ public class AccountRegistrationDTO {
         phoneNumber = builder.phoneNumber;
         email = builder.email;
         type = builder.type;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public MemberType getType() {
-        return type;
     }
 
     public boolean passwordConfirm() {

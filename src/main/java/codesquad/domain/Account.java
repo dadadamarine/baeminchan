@@ -1,6 +1,6 @@
 package codesquad.domain;
 
-import codesquad.web.dto.AccountRegistrationDTO;
+import codesquad.web.dto.AccountRegistration;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -22,6 +23,7 @@ public class Account extends AbstractEntity {
     private String userId;
 
     @Column(nullable = false)
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$")
     private String password;
 
     @Column(nullable = false)
@@ -64,13 +66,13 @@ public class Account extends AbstractEntity {
         this.type = type;
     }
 
-    public Account(AccountRegistrationDTO accountRegistrationDTO) {
-        this.userId = accountRegistrationDTO.getUserId();
-        this.password = accountRegistrationDTO.getPassword();
-        this.name = accountRegistrationDTO.getName();
-        this.email = accountRegistrationDTO.getEmail();
-        this.phoneNumber = accountRegistrationDTO.getPhoneNumber();
-        this.type = accountRegistrationDTO.getType();
+    public Account(AccountRegistration accountRegistration) {
+        this.userId = accountRegistration.getUserId();
+        this.password = accountRegistration.getPassword();
+        this.name = accountRegistration.getName();
+        this.email = accountRegistration.getEmail();
+        this.phoneNumber = accountRegistration.getPhoneNumber();
+        this.type = accountRegistration.getType();
     }
 
     public boolean matchPassword(String targetPassword) {

@@ -66,6 +66,16 @@
     - https://inyl.github.io/programming/2017/05/05/slf4j.html
 - 로깅 전략
 
+## Annotation
+- @Interface
+    - https://stackoverflow.com/questions/918393/whats-the-difference-between-interface-and-interface-in-java
+    - https://docs.oracle.com/javase/1.5.0/docs/guide/language/annotations.html
+    - https://stackoverflow.com/questions/41590543/default-in-interface-in-spring
+- @Pattern 정규식
+    - https://stackoverflow.com/questions/3802192/regexp-java-for-password-validation
+
+## NotEmpty vs NotNull vs NotBlank
+- http://wonwoo.ml/index.php/post/520
 
 # Javascript 
 

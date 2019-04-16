@@ -2,8 +2,8 @@ package codesquad.service;
 
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
-import codesquad.exception.account.CannotJoinException;
-import codesquad.web.dto.AccountRegistrationDTO;
+import codesquad.exception.account.CannotRegistrationException;
+import codesquad.web.dto.AccountRegistration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,25 +32,25 @@ public class AccountServiceTest {
 
     @Test
     public void saveTest() {
-        AccountRegistrationDTO accountRegistrationDTO =
-                new AccountRegistrationDTO.Builder(TEST_USERID, TEST_PASSWORD, TEST_PASSWORD, "testname").build();
-        Account account = new Account(accountRegistrationDTO);
-        Account mockSavedAccount = new Account(accountRegistrationDTO);
+        AccountRegistration accountRegistration =
+                new AccountRegistration.Builder(TEST_USERID, TEST_PASSWORD, TEST_PASSWORD, "testname").build();
+        Account account = new Account(accountRegistration);
+        Account mockSavedAccount = new Account(accountRegistration);
         mockSavedAccount.setPassword(ENCODED_PASSWORD);
         when(accountRepository.save(account)).thenReturn(mockSavedAccount);
         when(passwordEncoder.encode(account.getPassword())).thenReturn(ENCODED_PASSWORD);
 
-        Account savedAccount = accountService.save(accountRegistrationDTO);
+        Account savedAccount = accountService.save(accountRegistration);
 
         assertThat(savedAccount.getPassword()).isEqualTo(ENCODED_PASSWORD);
     }
 
-    @Test(expected = CannotJoinException.class)
+    @Test(expected = CannotRegistrationException.class)
     public void save_unmatch_password_test() {
-        AccountRegistrationDTO accountRegistrationDTO =
-                new AccountRegistrationDTO.Builder(TEST_USERID, TEST_PASSWORD, "!Ttest1234", "testname").build();
+        AccountRegistration accountRegistration =
+                new AccountRegistration.Builder(TEST_USERID, TEST_PASSWORD, "!Ttest1234", "testname").build();
 
-        Account savedAccount = accountService.save(accountRegistrationDTO);
+        Account savedAccount = accountService.save(accountRegistration);
     }
 
 }

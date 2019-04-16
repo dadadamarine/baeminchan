@@ -1,22 +1,21 @@
 package codesquad.web.dto;
 
-import codesquad.constraint.ValidPassword;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-import javax.validation.constraints.NotEmpty;
+public class AccountLogin {
 
-public class AccountLoginDTO {
-
-    @NotEmpty
+    @NotBlank
     String userId;
 
-    @NotEmpty
-    @ValidPassword
+    @NotBlank
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$")
     String password;
 
-    public AccountLoginDTO() {
+    public AccountLogin() {
     }
 
-    public AccountLoginDTO(String userId, String password) {
+    public AccountLogin(String userId, String password) {
         this.userId = userId;
         this.password = password;
     }

@@ -1,6 +1,6 @@
 package codesquad.constraint;
 
-import codesquad.web.dto.AccountRegistrationDTO;
+import codesquad.web.dto.AccountRegistration;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class PasswordConstraintValidatorTest {
 
     @Test
     public void valid() {
-        AccountRegistrationDTO dto = new AccountRegistrationDTO
+        AccountRegistration dto = new AccountRegistration
                 .Builder("tests@gmail.com",
                 "!testT1234",
                 "!testT1234",
@@ -33,13 +33,13 @@ public class PasswordConstraintValidatorTest {
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
-        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
         assertThat(constraintViolations.size()).isEqualTo(0);
     }
 
     @Test
     public void NoUpperCasePassword() {
-        AccountRegistrationDTO dto = new AccountRegistrationDTO
+        AccountRegistration dto = new AccountRegistration
                 .Builder("tests@gmail.com",
                 "!test1234",
                 "!testT1234",
@@ -47,17 +47,17 @@ public class PasswordConstraintValidatorTest {
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
-        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
         assertThat(constraintViolations.size()).isEqualTo(1);
 
-        for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
+        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
             log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }
 
     @Test
     public void noSpeicialChracterPassword() {
-        AccountRegistrationDTO dto = new AccountRegistrationDTO
+        AccountRegistration dto = new AccountRegistration
                 .Builder("tests@gmail.com",
                 "testT1234",
                 "!testT1234",
@@ -65,10 +65,10 @@ public class PasswordConstraintValidatorTest {
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
-        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
         assertThat(constraintViolations.size()).isEqualTo(1);
 
-        for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
+        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
             log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }

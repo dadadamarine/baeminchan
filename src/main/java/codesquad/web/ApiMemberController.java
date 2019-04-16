@@ -1,10 +1,9 @@
 package codesquad.web;
 
-import codesquad.exception.account.UnAuthenticationException;
 import codesquad.service.AccountService;
 import codesquad.util.SessionUtils;
-import codesquad.web.dto.AccountLoginDTO;
-import codesquad.web.dto.AccountRegistrationDTO;
+import codesquad.web.dto.AccountLogin;
+import codesquad.web.dto.AccountRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +29,14 @@ public class ApiMemberController {
     AccountService accountService;
 
     @PostMapping("")
-    public ResponseEntity<Void> createMember(@Valid @RequestBody AccountRegistrationDTO account) {
-        accountService.save(account);
+    public ResponseEntity<Void> createMember(@Valid @RequestBody AccountRegistration accountRegistration) {
+        accountService.save(accountRegistration);
         return makeDefaultResponseEntity("/login.html", HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLoginDTO accountLoginDTO) {
-        session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
+    public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLogin accountLogin) {
+        session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLogin));
         return makeDefaultResponseEntity("/", HttpStatus.OK);
     }
 

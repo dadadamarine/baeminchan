@@ -1,4 +1,6 @@
-function appendAnswer({id, contents, question, writer, time}) {
+function appendAnswer(response) {
+    console.log(response);
+    console.log(response.body)
 }
 
 var $ = jQuery.noConflict();
@@ -12,12 +14,7 @@ function fetchManager({url, method, body, headers, callback}) {
         credentials: "same-origin"
     }).then((response) => {
         console.log(response);
-    }).then( ({result, status}) => {
-        if(status >= 400) {
-            console.log('error 가 발생했네요 ', result.error);
-        }else{
-            callback(result)
-        }
+        console.log(response.json())
     }).catch(err => {
         console.log("oops..", err)
     })
