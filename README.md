@@ -108,3 +108,13 @@
     - [빌더 사용 및 기본값 설정방법](https://tomining.tistory.com/180)
     - 의문사항 : 어째서 lombok의 빌더패턴을 사용할땐 Jackson 매핑을 위한 noArgsConstructor을 생성하지 않아도 되는가.
     - 의문사항 : 어째서 @NoArgsConstructor를 사용해주면, @AllArgsConstructor도 같이 붙여햐 하는가.
+    
+    
+- 계층구조의 데이터 (recursive query)
+    - [오라클 : START WITH CONNECT BY 구문에 대한 이해](http://playdata.io/tutorials/sql/%EC%98%A4%EB%9D%BC%ED%81%B4-start-with-connect-by)
+    - [단일테이블의 Tree 구조를 위한 Self Join](https://eclipse4j.tistory.com/211)
+    - [Create a Tree using JPA](https://stackoverflow.com/questions/14388037/create-a-tree-using-jpa)
+    
+- JPA CASCADE
+    - [JPA 영속성 전이 개념](http://wonwoo.ml/index.php/post/1002)
+    - [Orphan Removal vs Cascade Delete](https://agritsik.wordpress.com/2015/08/06/orphan-removal-vs-cascade-delete-or-how-to-delete-related-entities/)

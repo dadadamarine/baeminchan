@@ -1,7 +1,7 @@
 package codesquad.web;
 
 import codesquad.domain.AccountRepository;
-import codesquad.domain.MemberType;
+import codesquad.domain.AccountType;
 import codesquad.web.dto.AccountLoginDTO;
 import codesquad.web.dto.AccountRegistrationDTO;
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class AccountAcceptanceTest {
                 .builder("test1@google.com", "!Password1234", "!Password1234", "name")
                 .phoneNumber("010-1234-1234")
                 .email("test@google.com")
-                .type(MemberType.MEMBER)
+                .type(AccountType.MEMBER)
                 .build();
 
         ResponseEntity<String> response = sendPost("/member", account, String.class);

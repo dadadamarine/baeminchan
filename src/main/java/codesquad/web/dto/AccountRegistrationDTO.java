@@ -1,11 +1,14 @@
 package codesquad.web.dto;
 
-import codesquad.domain.MemberType;
-import lombok.AllArgsConstructor;
+import codesquad.domain.AccountType;
+import codesquad.validation.ValidationRegexpType;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @Builder
@@ -16,25 +19,25 @@ public class AccountRegistrationDTO {
     private String userId;
 
     @NotBlank
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$")
+    @Pattern(regexp = ValidationRegexpType.PASSWORD)
     private String password;
 
     @NotBlank
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$")
+    @Pattern(regexp = ValidationRegexpType.PASSWORD)
     private String confirmPassword;
 
     @NotBlank
     private String name;
 
-    @Pattern(regexp = "^$|^\\d{3}-\\d{3,4}-\\d{4}$")
+    @Pattern(regexp = ValidationRegexpType.PHONE_NUMBER)
     private String phoneNumber;
 
     @Email
     private String email;
 
     @NotNull
-    @lombok.Builder.Default
-    private MemberType type = MemberType.MEMBER;
+    @Builder.Default
+    private AccountType type = AccountType.MEMBER;
 
     public static AccountRegistrationDTOBuilder builder(String userId, String password, String confirmPassword, String name) {
         return new AccountRegistrationDTOBuilder()

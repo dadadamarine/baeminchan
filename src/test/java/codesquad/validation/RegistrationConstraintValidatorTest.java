@@ -13,8 +13,8 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PasswordConstraintValidatorTest {
-    private static final Logger log = LoggerFactory.getLogger(PasswordConstraintValidatorTest.class);
+public class RegistrationConstraintValidatorTest {
+    private static final Logger log = LoggerFactory.getLogger(RegistrationConstraintValidatorTest.class);
 
     private static Validator validator;
 

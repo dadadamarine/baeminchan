@@ -1,5 +1,5 @@
 package codesquad.domain;
 
-public enum MemberType {
+public enum AccountType {
     MEMBER, MANAGER
 }

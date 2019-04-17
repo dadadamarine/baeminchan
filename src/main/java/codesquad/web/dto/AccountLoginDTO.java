@@ -1,6 +1,9 @@
 package codesquad.web.dto;
 
+import codesquad.validation.ValidationRegexpType;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
@@ -9,6 +12,7 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccountLoginDTO {
 
     @NotBlank
@@ -16,11 +20,8 @@ public class AccountLoginDTO {
     String userId;
 
     @NotBlank
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$")
+    @Pattern(regexp = ValidationRegexpType.PASSWORD)
     String password;
-
-    public AccountLoginDTO() {
-    }
 
     public AccountLoginDTO(String userId, String password) {
         this.userId = userId;
