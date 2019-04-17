@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -20,6 +21,7 @@ public class Account extends AbstractEntity {
 
     @Size(min = 3, max = 20)
     @Column(unique = true, nullable = false)
+    @Email
     private String userId;
 
     @Column(nullable = false)
@@ -31,10 +33,11 @@ public class Account extends AbstractEntity {
 
     @Size(max = 50)
     @Column
+    @Email
     private String email;
 
-    @Size(min = 12, max = 13)
     @Column
+    @Pattern(regexp = "^$|^\\d{3}-\\d{3,4}-\\d{4}$")
     private String phoneNumber;
 
     @Column(nullable = false)

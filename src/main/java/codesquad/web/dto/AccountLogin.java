@@ -1,11 +1,13 @@
 package codesquad.web.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 public class AccountLogin {
 
     @NotBlank
+    @Email
     String userId;
 
     @NotBlank

@@ -2,6 +2,7 @@ package codesquad.web.dto;
 
 import codesquad.domain.MemberType;
 import lombok.Getter;
+import org.springframework.security.core.parameters.P;
 
 import javax.validation.constraints.*;
 
@@ -23,9 +24,10 @@ public class AccountRegistration {
     @NotBlank
     private String name;
 
+    @Pattern(regexp = "^$|^\\d{3}-\\d{3,4}-\\d{4}$")
     private String phoneNumber;
 
-    @NotBlank
+    @Email
     private String email;
 
     @NotNull

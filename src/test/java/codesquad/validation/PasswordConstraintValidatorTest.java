@@ -1,4 +1,4 @@
-package codesquad.constraint;
+package codesquad.validation;
 
 import codesquad.web.dto.AccountRegistration;
 import org.junit.BeforeClass;
@@ -67,6 +67,41 @@ public class PasswordConstraintValidatorTest {
                 .build();
         Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
         assertThat(constraintViolations.size()).isEqualTo(1);
+
+        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
+            log.debug("violation error message : {}", constraintViolation.getMessage());
+        }
+    }
+
+    @Test
+    public void Allow_empty_phone_number() {
+        AccountRegistration dto = new AccountRegistration
+                .Builder("tests@gmail.com",
+                "!testT1234",
+                "!testT1234",
+                "테스트이름")
+                .email("test@email.com")
+                .phoneNumber("")
+                .build();
+        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
+        assertThat(constraintViolations.size()).isEqualTo(0);
+
+        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
+            log.debug("violation error message : {}", constraintViolation.getMessage());
+        }
+    }
+
+    @Test
+    public void Allow_Null_Phone_Number() {
+        AccountRegistration dto = new AccountRegistration
+                .Builder("tests@gmail.com",
+                "!testT1234",
+                "!testT1234",
+                "테스트이름")
+                .email("test@email.com")
+                .build();
+        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
+        assertThat(constraintViolations.size()).isEqualTo(0);
 
         for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
             log.debug("violation error message : {}", constraintViolation.getMessage());
