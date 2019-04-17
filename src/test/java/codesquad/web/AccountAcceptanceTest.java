@@ -2,8 +2,8 @@ package codesquad.web;
 
 import codesquad.domain.AccountRepository;
 import codesquad.domain.MemberType;
-import codesquad.web.dto.AccountLogin;
-import codesquad.web.dto.AccountRegistration;
+import codesquad.web.dto.AccountLoginDTO;
+import codesquad.web.dto.AccountRegistrationDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -29,8 +29,8 @@ public class AccountAcceptanceTest {
 
     @Test
     public void create() throws Exception {
-        AccountRegistration account = new AccountRegistration
-                .Builder("test1@google.com", "!Password1234", "!Password1234", "name")
+        AccountRegistrationDTO account = AccountRegistrationDTO
+                .builder("test1@google.com", "!Password1234", "!Password1234", "name")
                 .phoneNumber("010-1234-1234")
                 .email("test@google.com")
                 .type(MemberType.MEMBER)
@@ -44,7 +44,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void createWithInvalidPassword() throws Exception {
-        AccountRegistration account = new AccountRegistration.Builder("test2@google.com", "!Password", "!Password1234", "name").build();
+        AccountRegistrationDTO account = AccountRegistrationDTO.builder("test2@google.com", "!Password", "!Password1234", "name").build();
         ResponseEntity<String> response = sendPost("/member", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -53,7 +53,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void createWithInvalidUserId() throws Exception {
-        AccountRegistration account = new AccountRegistration.Builder("t", "!Password1234", "!Password1234", "test@gmail.com").build();
+        AccountRegistrationDTO account = AccountRegistrationDTO.builder("t", "!Password1234", "!Password1234", "test@gmail.com").build();
         ResponseEntity<String> response = sendPost("/member", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -62,7 +62,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void login() throws Exception {
-        AccountLogin account = new AccountLogin("test@google.com", "!Test1234");
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Test1234");
         ResponseEntity<Void> response = sendPost("/member/login", account, Void.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -71,7 +71,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void loginWithNotFoundAccount() throws Exception {
-        AccountLogin account = new AccountLogin("testes@google.com", "!Test1234");
+        AccountLoginDTO account = new AccountLoginDTO("testes@google.com", "!Test1234");
         ResponseEntity<String> response = sendPost("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
@@ -80,7 +80,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void loginWithUnmatchPassword() throws Exception {
-        AccountLogin account = new AccountLogin("test@google.com", "!Test12345");
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Test12345");
         ResponseEntity<String> response = sendPost("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
@@ -89,7 +89,7 @@ public class AccountAcceptanceTest {
 
     @Test
     public void loginWithInvalidPassword() throws Exception {
-        AccountLogin account = new AccountLogin("test@google.com", "!test12345");
+        AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!test12345");
         ResponseEntity<String> response = sendPost("/member/login", account, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);

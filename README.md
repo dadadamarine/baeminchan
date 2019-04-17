@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 코드스쿼드의 온라인 코드 리뷰 과정](https://github.com/code-squad/codesquad-docs/blob/master/codereview/README.md)
 * [동영상으로 살펴보는 코드스쿼드의 온라인 코드 리뷰 과정](https://youtu.be/a5c9ku-_fok)
 
-# 학습내용
+# STEP1 학습내용 
 
 ## spring security 인증범위 설정
 - https://gs.saro.me/dev?page=20&tn=480
@@ -77,6 +77,11 @@
 ## NotEmpty vs NotNull vs NotBlank
 - http://wonwoo.ml/index.php/post/520
 
+## Regex
+- 정규식 기본
+    - http://www.nextree.co.kr/p4327/
+- 기본 정규식 소스
+    - https://epthffh.tistory.com/entry/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%A0%95%EA%B7%9C%EC%8B%9D
 # Javascript 
 
 ## JS문법
@@ -96,3 +101,10 @@
 - ajax fetch 설명
     - https://gs.saro.me/dev?tn=564
     
+    
+# STEP2 학습내용 
+
+- Lombok 빌더패턴
+    - [빌더 사용 및 기본값 설정방법](https://tomining.tistory.com/180)
+    - 의문사항 : 어째서 lombok의 빌더패턴을 사용할땐 Jackson 매핑을 위한 noArgsConstructor을 생성하지 않아도 되는가.
+    - 의문사항 : 어째서 @NoArgsConstructor를 사용해주면, @AllArgsConstructor도 같이 붙여햐 하는가.

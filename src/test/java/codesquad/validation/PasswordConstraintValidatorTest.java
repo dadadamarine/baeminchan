@@ -1,6 +1,6 @@
 package codesquad.validation;
 
-import codesquad.web.dto.AccountRegistration;
+import codesquad.web.dto.AccountRegistrationDTO;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,85 +25,84 @@ public class PasswordConstraintValidatorTest {
 
     @Test
     public void valid() {
-        AccountRegistration dto = new AccountRegistration
-                .Builder("tests@gmail.com",
+        AccountRegistrationDTO registrationDTO = AccountRegistrationDTO.builder("tests@gmail.com",
                 "!testT1234",
                 "!testT1234",
                 "테스트이름")
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
-        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(registrationDTO);
         assertThat(constraintViolations.size()).isEqualTo(0);
     }
 
     @Test
     public void NoUpperCasePassword() {
-        AccountRegistration dto = new AccountRegistration
-                .Builder("tests@gmail.com",
+        AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
+                .builder("tests@gmail.com",
                 "!test1234",
                 "!testT1234",
                 "테스트이름")
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
-        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(registrationDTO);
         assertThat(constraintViolations.size()).isEqualTo(1);
 
-        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
+        for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
             log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }
 
     @Test
     public void noSpeicialChracterPassword() {
-        AccountRegistration dto = new AccountRegistration
-                .Builder("tests@gmail.com",
+        AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
+                .builder("tests@gmail.com",
                 "testT1234",
                 "!testT1234",
                 "테스트이름")
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
-        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(registrationDTO);
         assertThat(constraintViolations.size()).isEqualTo(1);
 
-        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
+        for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
             log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }
 
     @Test
     public void Allow_empty_phone_number() {
-        AccountRegistration dto = new AccountRegistration
-                .Builder("tests@gmail.com",
+        AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
+                .builder("tests@gmail.com",
                 "!testT1234",
                 "!testT1234",
                 "테스트이름")
                 .email("test@email.com")
                 .phoneNumber("")
                 .build();
-        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(registrationDTO);
         assertThat(constraintViolations.size()).isEqualTo(0);
 
-        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
+        for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
             log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }
 
     @Test
     public void Allow_Null_Phone_Number() {
-        AccountRegistration dto = new AccountRegistration
-                .Builder("tests@gmail.com",
+        AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
+                .builder("tests@gmail.com",
                 "!testT1234",
                 "!testT1234",
                 "테스트이름")
                 .email("test@email.com")
                 .build();
-        Set<ConstraintViolation<AccountRegistration>> constraintViolations = validator.validate(dto);
+        Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(registrationDTO);
         assertThat(constraintViolations.size()).isEqualTo(0);
 
-        for (ConstraintViolation<AccountRegistration> constraintViolation : constraintViolations) {
+        for (ConstraintViolation<AccountRegistrationDTO> constraintViolation : constraintViolations) {
             log.debug("violation error message : {}", constraintViolation.getMessage());
         }
     }

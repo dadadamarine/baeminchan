@@ -3,7 +3,7 @@ package codesquad.service;
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
 import codesquad.exception.account.CannotRegistrationException;
-import codesquad.web.dto.AccountRegistration;
+import codesquad.web.dto.AccountRegistrationDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,25 +32,25 @@ public class AccountServiceTest {
 
     @Test
     public void saveTest() {
-        AccountRegistration accountRegistration =
-                new AccountRegistration.Builder(TEST_USERID, TEST_PASSWORD, TEST_PASSWORD, "testname").build();
-        Account account = new Account(accountRegistration);
-        Account mockSavedAccount = new Account(accountRegistration);
+        AccountRegistrationDTO accountRegistrationDTO =
+                AccountRegistrationDTO.builder(TEST_USERID, TEST_PASSWORD, TEST_PASSWORD, "testname").build();
+        Account account = new Account(accountRegistrationDTO);
+        Account mockSavedAccount = new Account(accountRegistrationDTO);
         mockSavedAccount.setPassword(ENCODED_PASSWORD);
         when(accountRepository.save(account)).thenReturn(mockSavedAccount);
         when(passwordEncoder.encode(account.getPassword())).thenReturn(ENCODED_PASSWORD);
 
-        Account savedAccount = accountService.save(accountRegistration);
+        Account savedAccount = accountService.save(accountRegistrationDTO);
 
         assertThat(savedAccount.getPassword()).isEqualTo(ENCODED_PASSWORD);
     }
 
     @Test(expected = CannotRegistrationException.class)
     public void save_unmatch_password_test() {
-        AccountRegistration accountRegistration =
-                new AccountRegistration.Builder(TEST_USERID, TEST_PASSWORD, "!Ttest1234", "testname").build();
+        AccountRegistrationDTO accountRegistrationDTO =
+                AccountRegistrationDTO.builder(TEST_USERID, TEST_PASSWORD, "!Ttest1234", "testname").build();
 
-        Account savedAccount = accountService.save(accountRegistration);
+        Account savedAccount = accountService.save(accountRegistrationDTO);
     }
 
 }

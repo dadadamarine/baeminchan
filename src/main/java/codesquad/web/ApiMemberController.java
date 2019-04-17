@@ -2,8 +2,8 @@ package codesquad.web;
 
 import codesquad.service.AccountService;
 import codesquad.util.SessionUtils;
-import codesquad.web.dto.AccountLogin;
-import codesquad.web.dto.AccountRegistration;
+import codesquad.web.dto.AccountLoginDTO;
+import codesquad.web.dto.AccountRegistrationDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +29,14 @@ public class ApiMemberController {
     AccountService accountService;
 
     @PostMapping("")
-    public ResponseEntity<Void> createMember(@Valid @RequestBody AccountRegistration accountRegistration) {
-        accountService.save(accountRegistration);
+    public ResponseEntity<Void> createMember(@Valid @RequestBody AccountRegistrationDTO accountRegistrationDTO) {
+        accountService.save(accountRegistrationDTO);
         return makeDefaultResponseEntity("/login.html", HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLogin accountLogin) {
-        session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLogin));
+    public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLoginDTO accountLoginDTO) {
+        session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
         return makeDefaultResponseEntity("/", HttpStatus.OK);
     }
 

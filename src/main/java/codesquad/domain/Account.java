@@ -1,6 +1,6 @@
 package codesquad.domain;
 
-import codesquad.web.dto.AccountRegistration;
+import codesquad.web.dto.AccountRegistrationDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -69,13 +69,13 @@ public class Account extends AbstractEntity {
         this.type = type;
     }
 
-    public Account(AccountRegistration accountRegistration) {
-        this.userId = accountRegistration.getUserId();
-        this.password = accountRegistration.getPassword();
-        this.name = accountRegistration.getName();
-        this.email = accountRegistration.getEmail();
-        this.phoneNumber = accountRegistration.getPhoneNumber();
-        this.type = accountRegistration.getType();
+    public Account(AccountRegistrationDTO accountRegistrationDTO) {
+        this.userId = accountRegistrationDTO.getUserId();
+        this.password = accountRegistrationDTO.getPassword();
+        this.name = accountRegistrationDTO.getName();
+        this.email = accountRegistrationDTO.getEmail();
+        this.phoneNumber = accountRegistrationDTO.getPhoneNumber();
+        this.type = accountRegistrationDTO.getType();
     }
 
     public boolean matchPassword(String targetPassword) {
