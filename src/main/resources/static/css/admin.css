@@ -18,7 +18,7 @@
 
 }
 .category{
-    border-bottom: 2px solid gray;;
+    border-bottom: 2px solid gray;
 }
 .menu-item a{
     color:black;
@@ -31,7 +31,7 @@
 .category-editor_add{
     height:60px;
     text-align: center;
-    border:1px solid rgba(0, 0, 0, 0.2);
+    border-bottom:1px solid rgba(0, 0, 0, 0.1);
 }
 .category-editor_add div{
     font-weight: bold;

@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.URI;
 
+import static support.web.ResponseGenerator.makeDefaultResponseEntity;
+
 @RestController
 @RequestMapping("/member")
 public class ApiMemberController {
@@ -38,12 +40,6 @@ public class ApiMemberController {
     public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLoginDTO accountLoginDTO) {
         session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
         return makeDefaultResponseEntity("/", HttpStatus.OK);
-    }
-
-    public ResponseEntity<Void> makeDefaultResponseEntity(String uri, HttpStatus httpStatus) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create(uri));
-        return new ResponseEntity<>(headers, httpStatus);
     }
 
 }

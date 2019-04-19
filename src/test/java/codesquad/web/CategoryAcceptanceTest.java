@@ -26,7 +26,7 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     MenuCategoryRepository menuCategoryRepository;
 
     @Test
-    public void get_test() {
+    public void index_test() {
         ResponseEntity<String> reponse = sendGet("/", String.class);
 
         log.info("body : {}", reponse);
@@ -34,7 +34,17 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void create_test(){
+    public void api_get_test(){
+        ResponseEntity<MenuCategory> response = sendGet("/api/menuCategory", MenuCategory.class);
+
+        log.info("body : {}", response);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody().getChildren().size()).isEqualTo(7);
+        assertThat(response.getBody().getName()).isEqualTo("categories");
+    }
+
+    @Test
+    public void api_create_test(){
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 자식");
         category.setParentId(1l);
@@ -45,7 +55,7 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void create_category_test(){
+    public void api_create_category_test(){
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 카테고리");
         ResponseEntity<MenuCategory> response = sendPost("/api/menuCategory", category, MenuCategory.class);
@@ -55,10 +65,11 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void delete_test(){
-        ResponseEntity<String> response = sendDelete("/api/menuCategory/1", String.class);
+    public void api_delete_test(){
+        ResponseEntity<MenuCategory> response = sendDelete("/api/menuCategory/1", MenuCategory.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody().getName()).isEqualTo("밑반찬");
     }
 
 }
