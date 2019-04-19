@@ -18,6 +18,12 @@ public class PageController {
         return "index";
     }
 
+    @GetMapping("/admin")
+    public String adminPage(Model model) {
+        model.addAttribute("category", menuCategoryService.findRoot());
+        return "admin";
+    }
+
     @GetMapping("/login")
     public String loginForm() {
         return "login";

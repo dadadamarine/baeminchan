@@ -24,11 +24,21 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     MenuCategoryRepository menuCategoryRepository;
 
     @Test
-    public void get_category_test() {
+    public void get_test() {
         ResponseEntity<String> reponse = sendGet("/", String.class);
 
         log.info("body : {}", reponse);
         assertThat(reponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void create_test(){
+
+    }
+
+    @Test
+    public void delete_test(){
+
     }
 
 }
