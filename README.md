@@ -118,3 +118,9 @@
 - JPA CASCADE
     - [JPA 영속성 전이 개념](http://wonwoo.ml/index.php/post/1002)
     - [Orphan Removal vs Cascade Delete](https://agritsik.wordpress.com/2015/08/06/orphan-removal-vs-cascade-delete-or-how-to-delete-related-entities/)
+    
+- Docker Mysql 
+    - 한글깨짐현상
+        - ~~[컨테이너 생성시 설정으로 해결](http://epr.pe.kr/wordpress/?p=553)~~ -> 컨테이너가 생성되지 않는 에러가 
+        - [my.cnf 변경으로 해결](http:s//gcjbro.blogspot.com/2016/11/mysql.html)
+            - http://egloos.zum.com/mcchae/v/11250100
