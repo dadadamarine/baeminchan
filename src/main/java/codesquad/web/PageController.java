@@ -20,7 +20,7 @@ public class PageController {
 
     @GetMapping("/admin")
     public String adminPage(Model model) {
-        model.addAttribute("category", menuCategoryService.findCategories());
+        model.addAttribute("categories", menuCategoryService.findCategories());
         return "admin";
     }
 

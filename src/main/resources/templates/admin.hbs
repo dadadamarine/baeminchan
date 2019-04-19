@@ -22,21 +22,27 @@
         <div class="category">
             <div class="category-editor_add">
                 <div>새로운 카테고리</div>
-                <input type="text">
-                <button class="add-button">추가하기</button>
+                <input id="category0" type="text">
+                <button class="add-button" onclick="sendCreateRequest(0)">추가하기</button>
             </div>
         </div>
         {{#each categories}}
             <div class="category">
                 <div class="category-editor_add">
-                    <div>{{this.name}}<button class="delete-button" name="{{id}}"></button></div>
-                    <input type="text">
-                    <button class="add-button" name="{{id}}">추가하기</button>
+                    <div>
+                        {{this.name}}
+                        <button class="delete-button" name="{{id}}" onClick="sendDeleteRequest(this.name)"></button>
+                    </div>
+                    <input id="category{{this.id}}" type="text">
+                    <button class="add-button" name="{{this.id}}" onClick="sendCreateRequest(this.name)">추가하기</button>
                 </div>
                 {{#each this.children}}
                     <div class="category-editor_contents">
                         <ul class="category-list">
-                            <li class="category-list_item">{{this.name}}<button class="delete-button" name="{{id}}"></button></li>
+                            <li class="category-list_item">
+                                {{this.name}}
+                                <button class="delete-button" name="{{id}}" onClick="sendDeleteRequest(this.name)"">
+                            </button></li>
                         </ul>
                     </div>
                 {{/each}}

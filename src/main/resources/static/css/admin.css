@@ -56,11 +56,13 @@
 }
 
 .delete-button{
+    cursor: pointer;
     margin-left:20px;
-    background-image:url("../img/delete-button.png");
+    border: none;
+    background-image:url("https://image.flaticon.com/icons/svg/69/69324.svg");
     background-repeat: no-repeat;
-    -webkit-background-size: 25px;
-    background-size: 25px;
-    width:25px;
-    height:25px;
+    -webkit-background-size: contain;
+    background-size: contain;
+    width:15px;
+    height:15px;
 }
