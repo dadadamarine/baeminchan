@@ -1,13 +1,20 @@
 package codesquad.web;
 
+import codesquad.service.MenuCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
 
+    @Autowired
+    private MenuCategoryService menuCategoryService;
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("category", menuCategoryService.findRoot());
         return "index";
     }
 

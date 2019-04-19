@@ -26,7 +26,7 @@ public class ApiMemberController {
     private static final Logger log = LoggerFactory.getLogger(ApiMemberController.class);
 
     @Autowired
-    AccountService accountService;
+    private AccountService accountService;
 
     @PostMapping("")
     public ResponseEntity<Void> createMember(@Valid @RequestBody AccountRegistrationDTO accountRegistrationDTO) {

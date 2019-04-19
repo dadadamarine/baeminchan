@@ -1,5 +1,6 @@
 package codesquad;
 
+import com.github.jknack.handlebars.springmvc.HandlebarsViewResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +20,5 @@ public class WebMvcConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

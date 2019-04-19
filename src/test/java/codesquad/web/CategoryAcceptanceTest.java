@@ -1,6 +1,5 @@
 package codesquad.web;
 
-import codesquad.domain.MenuCategory;
 import codesquad.domain.MenuCategoryRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,11 +24,11 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     MenuCategoryRepository menuCategoryRepository;
 
     @Test
-    public void get_category_test(){
-        ResponseEntity<MenuCategory> reponse = sendGet("/", MenuCategory.class);
+    public void get_category_test() {
+        ResponseEntity<String> reponse = sendGet("/", String.class);
 
+        log.info("body : {}", reponse);
         assertThat(reponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        log.debug("body : {}" , reponse.getBody());
     }
 
 }

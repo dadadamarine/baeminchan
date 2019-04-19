@@ -85,6 +85,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
