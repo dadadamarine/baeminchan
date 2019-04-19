@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,5 +18,12 @@ public class MenuCategoryDTO {
     private String name;
 
     private Long parentId;
+
+    public boolean hasParent(){
+        if(parentId == null){
+            return false;
+        }
+        return true;
+    }
 
 }

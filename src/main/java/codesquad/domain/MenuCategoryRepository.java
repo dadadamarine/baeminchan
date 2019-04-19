@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface MenuCategoryRepository extends JpaRepository<MenuCategory, Long> {
 
-    Optional<MenuCategory> findByParent(MenuCategory parent);
+    List<MenuCategory> findByParent(MenuCategory parent);
 }

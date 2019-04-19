@@ -7,6 +7,8 @@ import codesquad.web.dto.MenuCategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MenuCategoryService {
 
@@ -17,22 +19,31 @@ public class MenuCategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public MenuCategory findRoot() {
-        return categoryRepository.findByParent(null)
-                .orElseThrow(CategoryNotFoundException::new);
+    public List<MenuCategory> findCategories() {
+        return categoryRepository.findByParent(null);
     }
 
     public MenuCategory create(MenuCategoryDTO menuCategoryDTO) {
-        //TODO 서비스 생성, 부모가 있을때 없을때 구분할것.
-        return null;
+        MenuCategory menuCategory = new MenuCategory();
+        menuCategory.setName(menuCategoryDTO.getName());
+        if(menuCategoryDTO.hasParent()){
+            menuCategory.setParent(findById(menuCategoryDTO.getParentId()));
+            return categoryRepository.save(menuCategory);
+        }
+        menuCategory.setParent(null);
+        return categoryRepository.save(menuCategory);
     }
 
     public MenuCategory deleteById(Long id) {
-        MenuCategory menuCategory = categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
-        return deleteWithChilderen(menuCategory);
+        MenuCategory menuCategory = findById(id);
+        return deleteWithChildren(menuCategory);
     }
 
-    private MenuCategory deleteWithChilderen(MenuCategory menuCategory) {
+    public MenuCategory findById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
+    }
+
+    private MenuCategory deleteWithChildren(MenuCategory menuCategory) {
         categoryRepository.delete(menuCategory);
         return menuCategory;
     }

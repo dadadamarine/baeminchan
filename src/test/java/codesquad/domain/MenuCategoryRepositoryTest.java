@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -47,10 +49,9 @@ public class MenuCategoryRepositoryTest {
 
     @Test
     public void find_root_test() {
-        MenuCategory rootCategory = categoryRepository.findByParent(null).get();
+        List<MenuCategory> rootCategory = categoryRepository.findByParent(null);
 
-        assertThat(rootCategory.getChildren().size()).isEqualTo(7);
-        assertThat(rootCategory.getName()).isEqualTo("categories");
+        assertThat(rootCategory.size()).isEqualTo(7);
     }
 
     @Test

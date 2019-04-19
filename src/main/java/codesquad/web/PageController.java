@@ -14,13 +14,13 @@ public class PageController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("category", menuCategoryService.findRoot());
+        model.addAttribute("categories", menuCategoryService.findCategories());
         return "index";
     }
 
     @GetMapping("/admin")
     public String adminPage(Model model) {
-        model.addAttribute("category", menuCategoryService.findRoot());
+        model.addAttribute("category", menuCategoryService.findCategories());
         return "admin";
     }
 

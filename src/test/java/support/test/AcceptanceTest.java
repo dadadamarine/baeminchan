@@ -21,7 +21,6 @@ public class AcceptanceTest {
         return template.exchange(uri, HttpMethod.DELETE, createHttpEntity(null), responseType);
     }
 
-
     protected HttpEntity createHttpEntity(Object object) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
