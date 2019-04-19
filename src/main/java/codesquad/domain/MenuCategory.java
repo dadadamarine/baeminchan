@@ -23,12 +23,12 @@ public class MenuCategory {
     @Size(min = 1, max = 50)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "parentId")
     @JsonIgnore
     private MenuCategory parent;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
     private List<MenuCategory> children = new ArrayList<>();
 

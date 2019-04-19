@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +26,7 @@ public class MenuCategoryRepositoryTest {
     }
 
     @Test
-    public void data_structure_test(){
+    public void data_structure_test() {
         MenuCategory menuCategory = new MenuCategory(1L, "최상");
         MenuCategory parent = categoryRepository.save(menuCategory);
 
@@ -38,22 +36,30 @@ public class MenuCategoryRepositoryTest {
         parent.addChild(secondCategory);
         parent.addChild(thirdCategory);
 
+        categoryRepository.save(parent);
         MenuCategory fourthCategory = new MenuCategory(4L, "2단계 첫번째");
         thirdCategory.addChild(fourthCategory);
 
-        categoryRepository.save(parent);
-
         log.info("출력 : '{}'", categoryRepository.findAll());
-
 
         assertThat(categoryRepository.findById(1L).get().getChildren().size()).isEqualTo(2);
     }
 
     @Test
-    public void find_root_test(){
-        MenuCategory rootCategory= categoryRepository.findByParent(null).get();
+    public void find_root_test() {
+        MenuCategory rootCategory = categoryRepository.findByParent(null).get();
 
         assertThat(rootCategory.getChildren().size()).isEqualTo(7);
         assertThat(rootCategory.getName()).isEqualTo("categories");
+    }
+
+    @Test
+    public void delete_operate_test() {
+        MenuCategory fstCategory = categoryRepository.findById(1l).get();
+        categoryRepository.delete(fstCategory);
+
+        log.info("남은 카테고리 : '{}'", categoryRepository.findAll());
+        assertThat(categoryRepository.findAll().size()).isEqualTo(14);
+
     }
 }

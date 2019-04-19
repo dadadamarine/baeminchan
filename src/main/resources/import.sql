@@ -8,6 +8,7 @@ INSERT INTO menu_category (name, parent_id, id) values ('나물무침', 1l, 3l);
 INSERT INTO menu_category (name, parent_id, id) values ('볶음', 1l, 4l);
 INSERT INTO menu_category (name, parent_id, id) values ('조림', 1l, 5l);
 
+
 INSERT INTO menu_category (name, parent_id, id) values ('국·찌개', 19l, 6l);
 INSERT INTO menu_category (name, parent_id, id) values ('담백한국', 6l, 7l);
 INSERT INTO menu_category (name, parent_id, id) values ('찌개', 6l, 8l);
