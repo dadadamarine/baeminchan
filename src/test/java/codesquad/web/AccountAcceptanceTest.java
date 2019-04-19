@@ -10,19 +10,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import support.test.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AccountAcceptanceTest {
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+public class AccountAcceptanceTest extends AcceptanceTest {
     private static final Logger log = LoggerFactory.getLogger(AccountAcceptanceTest.class);
 
-    @Autowired
-    private TestRestTemplate template;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -96,15 +96,4 @@ public class AccountAcceptanceTest {
         log.debug("violation error message : {}", response.getBody());
 
     }
-
-    public <T> ResponseEntity<T> sendPost(String uri, Object object, Class<T> responseType) {
-        return template.exchange(uri, HttpMethod.POST, createHttpEntity(object), responseType);
-    }
-
-    public HttpEntity createHttpEntity(Object object) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return new HttpEntity<>(object, headers);
-    }
-
 }
