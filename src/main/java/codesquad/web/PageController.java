@@ -1,10 +1,13 @@
 package codesquad.web;
 
 import codesquad.service.MenuCategoryService;
+import codesquad.util.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class PageController {
@@ -13,8 +16,11 @@ public class PageController {
     private MenuCategoryService menuCategoryService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
         model.addAttribute("categories", menuCategoryService.findCategories());
+        if(SessionUtils.isLogin(session)){
+            model.addAttribute(SessionUtils.getLoginUser(session));
+        }
         return "index";
     }
 

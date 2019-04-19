@@ -2,6 +2,7 @@ package codesquad.domain;
 
 import codesquad.validation.ValidationRegexpType;
 import codesquad.web.dto.AccountRegistrationDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account extends AbstractEntity {
+    public static final GuestAccount GUEST_ACCOUNT = new GuestAccount();
 
     @Size(min = 3, max = 20)
     @Column(unique = true, nullable = false)
@@ -87,4 +89,16 @@ public class Account extends AbstractEntity {
         password = passwordEncoder.encode(password);
         return this;
     }
+    private static class GuestAccount extends Account {
+        @Override
+        public boolean isGuestUser() {
+            return true;
+        }
+    }
+
+    @JsonIgnore
+    public boolean isGuestUser() {
+        return false;
+    }
+
 }

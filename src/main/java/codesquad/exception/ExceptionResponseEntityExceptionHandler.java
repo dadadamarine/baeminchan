@@ -51,7 +51,7 @@ public class ExceptionResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("member/login"));
         log.debug("UnAuthenticationException is happened!");
-        return new ResponseEntity<>(exceptionResponse, headers, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionResponse, headers, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

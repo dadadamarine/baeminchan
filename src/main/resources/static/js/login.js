@@ -1,5 +1,5 @@
 function appendAnswer(response) {
-    console.log(response);
+    window.location.href = window.location.origin;
 }
 var $ = jQuery.noConflict();
 
@@ -11,6 +11,9 @@ function fetchManager({url, method, body, headers, callback}) {
         headers,
         credentials: "same-origin"
     }).then((response) => {
+        if(response.status == 200){
+            callback(response);
+        }
         console.log(response);
     }).catch(err => {
         console.log("oops..", err)
