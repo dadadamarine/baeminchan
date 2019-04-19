@@ -1,6 +1,8 @@
 package codesquad.web;
 
+import codesquad.domain.MenuCategory;
 import codesquad.domain.MenuCategoryRepository;
+import codesquad.web.dto.MenuCategoryDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,12 +35,30 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void create_test(){
+        MenuCategoryDTO category = new MenuCategoryDTO();
+        category.setName("새로운 자식");
+        category.setParentId(1l);
+        ResponseEntity<MenuCategory> response = sendPost("/api/menuCategory", category, MenuCategory.class);
 
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody().getName()).isEqualTo("새로운 자식");
+    }
+
+    @Test
+    public void create_category_test(){
+        MenuCategoryDTO category = new MenuCategoryDTO();
+        category.setName("새로운 카테고리");
+        ResponseEntity<MenuCategory> response = sendPost("/api/menuCategory", category, MenuCategory.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody().getName()).isEqualTo("새로운 카테고리");
     }
 
     @Test
     public void delete_test(){
+        ResponseEntity<String> response = sendDelete("/api/menuCategory/1", String.class);
 
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
 }

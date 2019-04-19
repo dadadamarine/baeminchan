@@ -13,9 +13,14 @@ public class AcceptanceTest {
         return template.exchange(uri, HttpMethod.POST, createHttpEntity(object), responseType);
     }
 
-    protected <T> ResponseEntity<T> sendGet(String location, Class<T> responseType) {
-        return template.getForEntity(location, responseType);
+    protected <T> ResponseEntity<T> sendGet(String uri, Class<T> responseType) {
+        return template.getForEntity(uri, responseType);
     }
+
+    protected <T> ResponseEntity<T> sendDelete(String uri, Class<T> responseType) {
+        return template.exchange(uri, HttpMethod.DELETE, createHttpEntity(null), responseType);
+    }
+
 
     protected HttpEntity createHttpEntity(Object object) {
         HttpHeaders headers = new HttpHeaders();
