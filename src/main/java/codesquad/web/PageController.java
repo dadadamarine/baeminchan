@@ -1,7 +1,6 @@
 package codesquad.web;
 
 import codesquad.domain.Account;
-import codesquad.security.MagagerAccount;
 import codesquad.service.MenuCategoryService;
 import codesquad.util.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class PageController {
     }
 
     @GetMapping("/admin")
-    public String adminPage(@MagagerAccount Account loginAccount, Model model) {
+    public String adminPage(Account loginAccount, Model model) {
         model.addAttribute("categories", menuCategoryService.findCategories());
         return "admin";
     }
