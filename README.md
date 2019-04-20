@@ -131,3 +131,12 @@
 
 - HandlerMethodArgumentResolver
     - [개념](https://addio3305.tistory.com/75)
+    - WebMvcConfigurer를 구현한 config에서 bean으로 등록해야고, 추가해줘야함.
+    
+- Dispatcher servelet 공부
+    - https://mangkyu.tistory.com/13
+    - [기타 스프링의 구조에 대해서도 공부하기](https://elfinlas.github.io/2017/12/28/SpringBootInterceptor/)
+    
+- Interceptor
+    - [개념](https://www.journaldev.com/2676/spring-mvc-interceptor-example-handlerinterceptor-handlerinterceptoradapter)
+    

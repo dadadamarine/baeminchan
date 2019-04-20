@@ -101,4 +101,11 @@ public class Account extends AbstractEntity {
         return false;
     }
 
+    @JsonIgnore
+    public boolean isManager(){
+        if(type == AccountType.MANAGER){
+            return true;
+        }
+        return false;
+    }
 }
