@@ -2,6 +2,7 @@ package codesquad;
 
 import codesquad.intercepter.AdminInterceptor;
 import codesquad.security.MagagerAccountHandlerMethodArgumentResolver;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
