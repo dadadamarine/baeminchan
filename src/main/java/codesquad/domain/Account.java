@@ -89,6 +89,7 @@ public class Account extends AbstractEntity {
         password = passwordEncoder.encode(password);
         return this;
     }
+
     private static class GuestAccount extends Account {
         @Override
         public boolean isGuestUser() {
@@ -102,8 +103,8 @@ public class Account extends AbstractEntity {
     }
 
     @JsonIgnore
-    public boolean isManager(){
-        if(type == AccountType.MANAGER){
+    public boolean isManager() {
+        if (type == AccountType.MANAGER) {
             return true;
         }
         return false;

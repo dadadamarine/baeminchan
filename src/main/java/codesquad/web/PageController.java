@@ -20,8 +20,8 @@ public class PageController {
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
         model.addAttribute("categories", menuCategoryService.findCategories());
-        if(SessionUtils.isLogin(session)){
-            model.addAttribute("account",SessionUtils.getLoginUser(session));
+        if (SessionUtils.isLogin(session)) {
+            model.addAttribute("account", SessionUtils.getLoginUser(session));
         }
         return "index";
     }

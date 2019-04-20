@@ -26,7 +26,7 @@ public class MenuCategoryService {
     public MenuCategory create(MenuCategoryDTO menuCategoryDTO) {
         MenuCategory menuCategory = new MenuCategory();
         menuCategory.setName(menuCategoryDTO.getName());
-        if(menuCategoryDTO.hasParent()){
+        if (menuCategoryDTO.hasParent()) {
             menuCategory.setParent(findById(menuCategoryDTO.getParentId()));
             return categoryRepository.save(menuCategory);
         }

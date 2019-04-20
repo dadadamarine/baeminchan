@@ -14,18 +14,19 @@ public class MagagerAccountHandlerMethodArgumentResolver implements HandlerMetho
     public boolean supportsParameter(MethodParameter methodParameter) {
         return methodParameter.hasMethodAnnotation(MagagerAccount.class);
     }
+
     @Override
     public Object resolveArgument(MethodParameter methodParameter,
                                   ModelAndViewContainer modelAndViewContainer,
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory) throws Exception {
         Account account = SessionUtils.getUserFromSession(nativeWebRequest);
-        if(account.isManager()){
+        if (account.isManager()) {
             return account;
         }
 
         MagagerAccount magagerAccount = methodParameter.getParameterAnnotation(MagagerAccount.class);
-        if(magagerAccount.isRequired()){
+        if (magagerAccount.isRequired()) {
             throw new UnAuthorizedException("You're not manager!");
         }
         return account;

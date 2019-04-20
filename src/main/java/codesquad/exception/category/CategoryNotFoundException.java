@@ -1,6 +1,6 @@
 package codesquad.exception.category;
 
-public class CategoryNotFoundException extends RuntimeException{
+public class CategoryNotFoundException extends RuntimeException {
 
     public CategoryNotFoundException() {
     }

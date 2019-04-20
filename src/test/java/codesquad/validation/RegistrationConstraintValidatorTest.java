@@ -40,9 +40,9 @@ public class RegistrationConstraintValidatorTest {
     public void NoUpperCasePassword() {
         AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
                 .builder("tests@gmail.com",
-                "!test1234",
-                "!testT1234",
-                "테스트이름")
+                        "!test1234",
+                        "!testT1234",
+                        "테스트이름")
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
@@ -58,9 +58,9 @@ public class RegistrationConstraintValidatorTest {
     public void noSpeicialChracterPassword() {
         AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
                 .builder("tests@gmail.com",
-                "testT1234",
-                "!testT1234",
-                "테스트이름")
+                        "testT1234",
+                        "!testT1234",
+                        "테스트이름")
                 .email("test@email.com")
                 .phoneNumber("010-0302-0301")
                 .build();
@@ -76,9 +76,9 @@ public class RegistrationConstraintValidatorTest {
     public void Allow_empty_phone_number() {
         AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
                 .builder("tests@gmail.com",
-                "!testT1234",
-                "!testT1234",
-                "테스트이름")
+                        "!testT1234",
+                        "!testT1234",
+                        "테스트이름")
                 .email("test@email.com")
                 .phoneNumber("")
                 .build();
@@ -94,9 +94,9 @@ public class RegistrationConstraintValidatorTest {
     public void Allow_Null_Phone_Number() {
         AccountRegistrationDTO registrationDTO = AccountRegistrationDTO
                 .builder("tests@gmail.com",
-                "!testT1234",
-                "!testT1234",
-                "테스트이름")
+                        "!testT1234",
+                        "!testT1234",
+                        "테스트이름")
                 .email("test@email.com")
                 .build();
         Set<ConstraintViolation<AccountRegistrationDTO>> constraintViolations = validator.validate(registrationDTO);

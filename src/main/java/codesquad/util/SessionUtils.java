@@ -16,7 +16,7 @@ public class SessionUtils {
     }
 
     public static Object getLoginUser(HttpSession session) {
-        if(!isLogin(session)){
+        if (!isLogin(session)) {
             return null;
         }
         return (Account) session.getAttribute(USER_SESSION_KEY);

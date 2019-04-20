@@ -36,7 +36,7 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void api_get_test(){
+    public void api_get_test() {
         ResponseEntity<List> response = sendGet("/api/menuCategory", List.class);
 
         log.info("body : {}", response);
@@ -44,7 +44,7 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void api_create_test(){
+    public void api_create_test() {
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 자식");
         category.setParentId(1l);
@@ -55,7 +55,7 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void api_create_category_test(){
+    public void api_create_category_test() {
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 카테고리");
         ResponseEntity<MenuCategory> response = sendPost("/api/menuCategory", category, MenuCategory.class);
@@ -65,12 +65,12 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void api_delete_test(){
+    public void api_delete_test() {
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 삭제된 카테고리");
         ResponseEntity<MenuCategory> responseByPost = sendPost("/api/menuCategory", category, MenuCategory.class);
 
-        ResponseEntity<MenuCategory> responseByDelete = sendDelete("/api/menuCategory/"+responseByPost.getBody().getId(), MenuCategory.class);
+        ResponseEntity<MenuCategory> responseByDelete = sendDelete("/api/menuCategory/" + responseByPost.getBody().getId(), MenuCategory.class);
 
         assertThat(responseByDelete.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseByDelete.getBody().getName()).isEqualTo("새로운 삭제된 카테고리");
