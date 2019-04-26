@@ -47,6 +47,10 @@ public class MenuCategory extends AbstractEntity {
         return this;
     }
 
+    public void removeChild(MenuCategory menuCategory) {
+        children.remove(menuCategory);
+    }
+
     @Override
     public String toString() {
         return "MenuCategory{" +
@@ -54,5 +58,18 @@ public class MenuCategory extends AbstractEntity {
                 ", name='" + name + '\'' +
                 ", children=" + children +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof MenuCategory){
+            MenuCategory targetMenuCategory = (MenuCategory) o;
+            return this.getId().equals(targetMenuCategory.getId());
+        }
+        return false;
+    }
+
+    public boolean isParentCategory(){
+        return parent == null;
     }
 }

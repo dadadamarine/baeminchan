@@ -7,50 +7,27 @@
     <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
-    <div class="title">
-        <h2>관리자 페이지</h2>
+<div class="title">
+    <h2>관리자 페이지</h2>
+</div>
+<div class="menu-wrapper">
+    <div class="menu-item">
+        <p><a href="/admin/category">카테고리 관리</a></p>
     </div>
-    <div class="menu-wrapper">
-        <div class="menu-item">
-            <p><a href="/admin/category">카테고리 관리</a></p>
-        </div>
-        <div class="menu-item">
-            <p><a href="/admin/category">관리</a></p>
+    <div class="menu-item">
+        <p><a href="/admin/category">관리</a></p>
+    </div>
+</div>
+<div class="category-editor">
+    <div class="category">
+        <div class="category-editor_add">
+            <div>새로운 카테고리</div>
+            <input id="category0" type="text">
+            <button class="add-button" onclick="sendCreateRequest(0)">추가하기</button>
         </div>
     </div>
-    <div class="category-editor">
-        <div class="category">
-            <div class="category-editor_add">
-                <div>새로운 카테고리</div>
-                <input id="category0" type="text">
-                <button class="add-button" onclick="sendCreateRequest(0)">추가하기</button>
-            </div>
-        </div>
-        {{#each categories}}
-            <div class="category">
-                <div class="category-editor_add">
-                    <div>
-                        {{this.name}}
-                        <button class="delete-button" name="{{id}}" onClick="sendDeleteRequest(this.name)"></button>
-                    </div>
-                    <input id="category{{this.id}}" type="text">
-                    <button class="add-button" name="{{this.id}}" onClick="sendCreateRequest(this.name)">추가하기</button>
-                </div>
-                {{#each this.children}}
-                    <div class="category-editor_contents">
-                        <ul class="category-list">
-                            <li class="category-list_item">
-                                {{this.name}}
-                                <button class="delete-button" name="{{id}}" onClick="sendDeleteRequest(this.name)"">
-                            </button></li>
-                        </ul>
-                    </div>
-                {{/each}}
-            </div>
-        {{/each}}
-        
-    </div>
-    <script src="/js/admin.js"></script>
+</div>
+<script src="/js/admin.js"></script>
 
 </body>
 </html>

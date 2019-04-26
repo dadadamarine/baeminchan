@@ -120,14 +120,14 @@ public class ApiMenuCategoryControllerTest {
         //given
         when(menuCategoryService.deleteById(1l))
                 .thenReturn(new MenuCategory());
-        when(managerArgumentResolver.supportsParameter((MethodParameter) notNull()))
-                .thenReturn(true);
-        when(managerArgumentResolver.resolveArgument(
-                (MethodParameter) notNull()
-                , (ModelAndViewContainer) notNull()
-                , (NativeWebRequest) notNull()
-                , (WebDataBinderFactory) notNull()
-        )).thenReturn(manager);
+//        when(managerArgumentResolver.supportsParameter((MethodParameter) notNull()))
+//                .thenReturn(true);
+//        when(managerArgumentResolver.resolveArgument(
+//                (MethodParameter) notNull()
+//                , (ModelAndViewContainer) notNull()
+//                , (NativeWebRequest) notNull()
+//                , (WebDataBinderFactory) notNull()
+//        )).thenReturn(manager);
 
         //when
         MockHttpServletResponse response = mockMvc.perform(

@@ -32,15 +32,26 @@ public class MenuCategoryService {
 
     public MenuCategory deleteById(Long id) {
         MenuCategory menuCategory = findById(id);
-        return deleteWithChildren(menuCategory);
+        if(menuCategory.isParentCategory()){
+            return deleteParentCategory(menuCategory);
+        }
+        return deleteChildCategory(menuCategory);
+    }
+
+    private MenuCategory deleteParentCategory(MenuCategory menuCategory) {
+        categoryRepository.delete(menuCategory);
+        return menuCategory;
+    }
+
+    private MenuCategory deleteChildCategory(MenuCategory menuCategory) {
+        MenuCategory parentCategory = menuCategory.getParent();
+        parentCategory.removeChild(menuCategory);
+        categoryRepository.save(parentCategory);
+        categoryRepository.delete(menuCategory);
+        return menuCategory;
     }
 
     public MenuCategory findById(Long id) {
         return categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
-    }
-
-    private MenuCategory deleteWithChildren(MenuCategory menuCategory) {
-        categoryRepository.delete(menuCategory);
-        return menuCategory;
     }
 }

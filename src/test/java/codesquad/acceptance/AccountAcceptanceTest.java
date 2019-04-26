@@ -88,7 +88,7 @@ public class AccountAcceptanceTest extends AcceptanceTest {
         AccountLoginDTO account = new AccountLoginDTO("testes@google.com", "!Test1234");
         ResponseEntity<String> response = sendPost("/member/login", account, String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("member/login");
     }
 
@@ -97,7 +97,7 @@ public class AccountAcceptanceTest extends AcceptanceTest {
         AccountLoginDTO account = new AccountLoginDTO("test@google.com", "!Test12345");
         ResponseEntity<String> response = sendPost("/member/login", account, String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("member/login");
     }
 

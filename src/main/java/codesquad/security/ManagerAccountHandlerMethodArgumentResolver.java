@@ -21,7 +21,7 @@ public class ManagerAccountHandlerMethodArgumentResolver implements HandlerMetho
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory) throws Exception {
         Account account = SessionUtils.getUserFromSession(nativeWebRequest);
-        if (!account.isManager()) {
+        if (!account.getType().isManager()) {
             throw new UnAuthorizedException("You're not manager!");
         }
         return account;
