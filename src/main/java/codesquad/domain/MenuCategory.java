@@ -1,10 +1,10 @@
 package codesquad.domain;
 
-import support.domain.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import support.domain.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -62,14 +62,14 @@ public class MenuCategory extends AbstractEntity {
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof MenuCategory){
+        if (o instanceof MenuCategory) {
             MenuCategory targetMenuCategory = (MenuCategory) o;
             return this.getId().equals(targetMenuCategory.getId());
         }
         return false;
     }
 
-    public boolean isParentCategory(){
+    public boolean isParentCategory() {
         return parent == null;
     }
 }

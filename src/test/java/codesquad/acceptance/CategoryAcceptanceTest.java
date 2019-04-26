@@ -23,6 +23,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class CategoryAcceptanceTest extends AcceptanceTest {
+    //TODO : BasicAuthorizationInterceptor를 통한 AcceptanceTest구현
     private static Logger log = LoggerFactory.getLogger(CategoryAcceptanceTest.class);
 
     @Autowired

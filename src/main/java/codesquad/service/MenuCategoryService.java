@@ -32,7 +32,7 @@ public class MenuCategoryService {
 
     public MenuCategory deleteById(Long id) {
         MenuCategory menuCategory = findById(id);
-        if(menuCategory.isParentCategory()){
+        if (menuCategory.isParentCategory()) {
             return deleteParentCategory(menuCategory);
         }
         return deleteChildCategory(menuCategory);
