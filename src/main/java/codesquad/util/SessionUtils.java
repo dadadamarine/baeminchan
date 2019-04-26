@@ -1,7 +1,6 @@
 package codesquad.util;
 
 import codesquad.domain.Account;
-import codesquad.exception.account.UnAuthenticationException;
 import codesquad.exception.account.UnAuthorizedException;
 import org.springframework.web.context.request.NativeWebRequest;
 
