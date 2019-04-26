@@ -1,5 +1,7 @@
 package support.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +12,8 @@ import java.util.Objects;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
 public abstract class AbstractEntity {
 
     @Id
@@ -46,25 +50,5 @@ public abstract class AbstractEntity {
     @Override
     public String toString() {
         return "AbstractEntity{" + "id=" + id + ", createAt=" + createAt + ", updateAt=" + updateAt + '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreateAt() {
-        return createAt;
-    }
-
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
-    }
-
-    public void setUpdateAt(LocalDateTime updateAt) {
-        this.updateAt = updateAt;
     }
 }

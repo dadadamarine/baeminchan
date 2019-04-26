@@ -1,6 +1,8 @@
 package codesquad.util;
 
 import codesquad.domain.Account;
+import codesquad.exception.account.UnAuthenticationException;
+import codesquad.exception.account.UnAuthorizedException;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,14 @@ public class SessionUtils {
         return true;
     }
 
+    private static boolean isLogin(NativeWebRequest nativeWebRequest) {
+        Object sessionUser = nativeWebRequest.getAttribute(USER_SESSION_KEY, NativeWebRequest.SCOPE_SESSION);
+        if (sessionUser == null) {
+            return false;
+        }
+        return true;
+    }
+
     public static Object getLoginUser(HttpSession session) {
         if (!isLogin(session)) {
             return null;
@@ -24,16 +34,8 @@ public class SessionUtils {
 
     public static Account getUserFromSession(NativeWebRequest nativeWebRequest) {
         if (!isLogin(nativeWebRequest)) {
-            return Account.GUEST_ACCOUNT;
+            throw new UnAuthorizedException("not login");
         }
         return (Account) nativeWebRequest.getAttribute(USER_SESSION_KEY, NativeWebRequest.SCOPE_SESSION);
-    }
-
-    private static boolean isLogin(NativeWebRequest nativeWebRequest) {
-        Object sessionUser = nativeWebRequest.getAttribute(USER_SESSION_KEY, NativeWebRequest.SCOPE_SESSION);
-        if (sessionUser == null) {
-            return false;
-        }
-        return true;
     }
 }

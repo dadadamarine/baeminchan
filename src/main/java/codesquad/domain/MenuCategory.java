@@ -1,10 +1,10 @@
 package codesquad.domain;
 
+import support.domain.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import support.domain.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

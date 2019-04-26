@@ -1,8 +1,8 @@
-package codesquad;
+package codesquad.configration;
 
 import codesquad.intercepter.AdminInterceptor;
-import codesquad.security.MagagerAccountHandlerMethodArgumentResolver;
 
+import codesquad.security.ManagerAccountHandlerMethodArgumentResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,13 +29,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public MagagerAccountHandlerMethodArgumentResolver magagerAccountHandlerMethodArgumentResolver() {
-        return new MagagerAccountHandlerMethodArgumentResolver();
+    public ManagerAccountHandlerMethodArgumentResolver managerAccountHandlerMethodArgumentResolver() {
+        return new ManagerAccountHandlerMethodArgumentResolver();
     }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(magagerAccountHandlerMethodArgumentResolver());
+        argumentResolvers.add(managerAccountHandlerMethodArgumentResolver());
     }
 
     @Override

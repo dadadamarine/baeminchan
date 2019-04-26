@@ -1,6 +1,8 @@
 package codesquad.web;
 
+import codesquad.domain.Account;
 import codesquad.domain.MenuCategory;
+import codesquad.security.ManagerAccount;
 import codesquad.service.MenuCategoryService;
 import codesquad.web.dto.MenuCategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,13 @@ public class ApiMenuCategoryController {
     }
 
     @PostMapping("")
-    public ResponseEntity<MenuCategory> create(@RequestBody MenuCategoryDTO menuCategoryDTO) {
+    public ResponseEntity<MenuCategory> create(@ManagerAccount Account manager, @RequestBody MenuCategoryDTO menuCategoryDTO) {
         MenuCategory createdCategory = menuCategoryService.create(menuCategoryDTO);
         return makeCreatedResponseEntity(createdCategory);
     }
 
     @DeleteMapping("/{id}")
-    public MenuCategory delete(@PathVariable Long id) {
+    public MenuCategory delete(@ManagerAccount Account manager, @PathVariable Long id) {
         return menuCategoryService.deleteById(id);
     }
 }

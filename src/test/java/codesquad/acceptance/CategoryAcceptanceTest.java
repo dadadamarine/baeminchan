@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.acceptance;
 
 import codesquad.domain.MenuCategory;
 import codesquad.domain.MenuCategoryRepository;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import support.test.AcceptanceTest;
 
@@ -25,12 +26,14 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     private static Logger log = LoggerFactory.getLogger(CategoryAcceptanceTest.class);
 
     @Autowired
-    MenuCategoryRepository menuCategoryRepository;
+    private MenuCategoryRepository menuCategoryRepository;
+
+    private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 
     @Test
     public void index_test() {
         ResponseEntity<String> reponse = sendGet("/", String.class);
-
         log.info("body : {}", reponse);
         assertThat(reponse.getStatusCode()).isEqualTo(HttpStatus.OK);
     }

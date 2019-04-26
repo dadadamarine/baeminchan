@@ -9,10 +9,10 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-public class MagagerAccountHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+public class ManagerAccountHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        return methodParameter.hasMethodAnnotation(MagagerAccount.class);
+        return methodParameter.hasParameterAnnotation(ManagerAccount.class);
     }
 
     @Override
@@ -21,12 +21,7 @@ public class MagagerAccountHandlerMethodArgumentResolver implements HandlerMetho
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory) throws Exception {
         Account account = SessionUtils.getUserFromSession(nativeWebRequest);
-        if (account.isManager()) {
-            return account;
-        }
-
-        MagagerAccount magagerAccount = methodParameter.getParameterAnnotation(MagagerAccount.class);
-        if (magagerAccount.isRequired()) {
+        if (!account.isManager()) {
             throw new UnAuthorizedException("You're not manager!");
         }
         return account;

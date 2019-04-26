@@ -15,10 +15,6 @@ public class MenuCategoryService {
     @Autowired
     private MenuCategoryRepository categoryRepository;
 
-    MenuCategoryService(MenuCategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
-
     public List<MenuCategory> findCategories() {
         return categoryRepository.findByParent(null);
     }

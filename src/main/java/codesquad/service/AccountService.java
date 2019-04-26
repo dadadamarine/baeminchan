@@ -7,6 +7,7 @@ import codesquad.exception.account.UnAuthenticationException;
 import codesquad.web.dto.AccountLoginDTO;
 import codesquad.web.dto.AccountRegistrationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,13 @@ public class AccountService {
         if (!dto.passwordConfirm()) {
             throw new CannotRegistrationException("unmatch password");
         }
-        return accountRepository.save(new Account(dto).encode(passwordEncoder));
+        Account savedAccount;
+        try {
+            savedAccount = accountRepository.save(new Account(dto).encode(passwordEncoder));
+        } catch (DataIntegrityViolationException e) {
+            throw new CannotRegistrationException("userId already exists");
+        }
+        return savedAccount;
     }
 
     public Account findAccount(AccountLoginDTO accountLoginDTO) {

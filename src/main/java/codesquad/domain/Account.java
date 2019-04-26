@@ -1,5 +1,6 @@
 package codesquad.domain;
 
+import support.domain.AbstractEntity;
 import codesquad.validation.ValidationRegexpType;
 import codesquad.web.dto.AccountRegistrationDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import support.domain.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +21,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Account extends AbstractEntity {
-    public static final GuestAccount GUEST_ACCOUNT = new GuestAccount();
 
     @Size(min = 3, max = 20)
     @Column(unique = true, nullable = false)
@@ -88,18 +87,6 @@ public class Account extends AbstractEntity {
     public Account encode(PasswordEncoder passwordEncoder) {
         password = passwordEncoder.encode(password);
         return this;
-    }
-
-    private static class GuestAccount extends Account {
-        @Override
-        public boolean isGuestUser() {
-            return true;
-        }
-    }
-
-    @JsonIgnore
-    public boolean isGuestUser() {
-        return false;
     }
 
     @JsonIgnore

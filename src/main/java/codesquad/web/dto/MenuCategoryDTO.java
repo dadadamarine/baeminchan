@@ -18,6 +18,9 @@ public class MenuCategoryDTO {
     private Long parentId;
 
     public boolean hasParent() {
+        if (parentId == null) {
+            return false;
+        }
         if (parentId == 0L) {
             return false;
         }

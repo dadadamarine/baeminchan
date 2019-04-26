@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.acceptance;
 
 import codesquad.domain.AccountRepository;
 import codesquad.domain.AccountType;
@@ -40,6 +40,20 @@ public class AccountAcceptanceTest extends AcceptanceTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(accountRepository.findByUserId(account.getUserId()).isPresent()).isEqualTo(true);
+    }
+
+    @Test
+    public void create_duplicate_userId() throws Exception {
+        AccountRegistrationDTO account = AccountRegistrationDTO
+                .builder("test@google.com", "!Password1234", "!Password1234", "name")
+                .phoneNumber("010-1234-1234")
+                .email("test@google.com")
+                .type(AccountType.MEMBER)
+                .build();
+
+        ResponseEntity<String> response = sendPost("/member", account, String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test

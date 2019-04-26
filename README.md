@@ -81,7 +81,9 @@
 - 정규식 기본
     - http://www.nextree.co.kr/p4327/
 - 기본 정규식 소스
-    - https://epthffh.tistory.com/entry/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%A0%95%EA%B7%9C%EC%8B%9D
+    - https://epthffh.tistory.com/entry/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%A0%95%EA%B7%9C%EC%8B%9D 
+    
+    
 # Javascript 
 
 ## JS문법
@@ -128,7 +130,13 @@
 - Handlebars
     - 2중 반복문 , this 
         - http://kwonnam.pe.kr/wiki/handlebars/handlebars_java
-
+        
+    - hbs 파일을 못읽을때
+        - handlebars-spring-boot-starter 덕분에 컨트롤러에서 문자열을 반환할때 앞의 path와 뒤의 파일 확장자는 자동으로 지정됩니다. 
+          (prefix: src/main/resources/templates, suffix: .hbs) 
+        - https://jojoldu.tistory.com/255
+        
+        
 - HandlerMethodArgumentResolver
     - [개념](https://addio3305.tistory.com/75)
     - WebMvcConfigurer를 구현한 config에서 bean으로 등록해야고, 추가해줘야함.
@@ -140,3 +148,9 @@
 - Interceptor
     - [개념](https://www.journaldev.com/2676/spring-mvc-interceptor-example-handlerinterceptor-handlerinterceptoradapter)
     
+- Spybean
+    - [개념](https://jojoldu.tistory.com/226)
+    
+- Column(unique = true)
+    - [database 생성시에만 유효](https://stackoverflow.com/questions/30460596/jpa-column-unique-true-what-is-really-point-of-having-unique-attribute)
+    - unique하지 않은 데이터가 입력될시 [MySQLIntegrityConstraintViolationException](https://www.baeldung.com/spring-dataIntegrityviolationexception)
