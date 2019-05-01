@@ -9,10 +9,10 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-public class ManagerAccountHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+public class AdminAccountHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        return methodParameter.hasParameterAnnotation(ManagerAccount.class);
+        return methodParameter.hasParameterAnnotation(AdminAccount.class);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ManagerAccountHandlerMethodArgumentResolver implements HandlerMetho
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory) throws Exception {
         Account account = SessionUtils.getUserFromSession(nativeWebRequest);
-        if (!account.getType().isManager()) {
+        if (!account.getType().isAdmin()) {
             throw new UnAuthorizedException("You're not manager!");
         }
         return account;

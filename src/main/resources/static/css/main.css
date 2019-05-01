@@ -1427,10 +1427,35 @@ a:focus {
   right: 0;
   top: 0;
   bottom: 0;
+  visibility: hidden;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
 }
+
+#main-visual .img-box .visible{
+  visibility: visible;
+}
+
+#main-visual .img-box .prev {
+  transform: translateX(-100%);
+  transition: transform 1s;
+  z-index: -1;
+
+}
+
+#main-visual .img-box .current {
+  transform: none;
+  transition: transform 1s;
+}
+
+#main-visual .img-box .next {
+  z-index: -1;
+  transition: transform 1s;
+  transform: translateX(100%);
+}
+
+
 
 #main-visual .img-box .img-1 {
   background-image: url(../img/img-main-visual-slide_1.jpg);

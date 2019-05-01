@@ -2,15 +2,15 @@ package codesquad.domain;
 
 public enum AccountType {
     MEMBER(false),
-    MANAGER(true);
+    ADMIN(true);
 
-    boolean isManager;
+    boolean isAdmin;
 
-    AccountType(boolean isManager) {
-        this.isManager = isManager;
+    AccountType(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
-    public boolean isManager() {
-        return isManager;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 }

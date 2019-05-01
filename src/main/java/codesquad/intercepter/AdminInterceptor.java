@@ -20,7 +20,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
         }
 
         Account account = (Account) loginAccount;
-        if (!account.getType().isManager()) {
+        if (!account.getType().isAdmin()) {
             throw new UnAuthorizedException("you're not manager");
         }
         return true;

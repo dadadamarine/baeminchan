@@ -1,5 +1,5 @@
 INSERT INTO account (id, user_id, password, name, email, phone_number, type ,create_at) values (1, 'test@google.com', '$2a$10$75iOIZVohML12YADpMEqre39yvfFQWn8PkoCf0VMct6ItcVVb77B.', '자바지기', 'javajigi@slipp.net', '010-1111-1111', 'MEMBER', CURRENT_TIMESTAMP());
-INSERT INTO account (id, user_id, password, name, email, phone_number, type ,create_at) values (2, 'admin@admin.com', '$2a$10$75iOIZVohML12YADpMEqre39yvfFQWn8PkoCf0VMct6ItcVVb77B.', '관리자', 'admin@admin.com', '010-1111-1111', 'MANAGER', CURRENT_TIMESTAMP());
+INSERT INTO account (id, user_id, password, name, email, phone_number, type ,create_at) values (2, 'admin@admin.com', '$2a$10$75iOIZVohML12YADpMEqre39yvfFQWn8PkoCf0VMct6ItcVVb77B.', '관리자', 'admin@admin.com', '010-1111-1111', 'ADMIN', CURRENT_TIMESTAMP());
 
 INSERT INTO menu_category (name, parent_id, id, create_at) values ('밑반찬', NULL, 1, CURRENT_TIMESTAMP());
 INSERT INTO menu_category (name, parent_id, id, create_at) values ('무침', 1, 2, CURRENT_TIMESTAMP());
