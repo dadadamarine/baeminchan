@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="title">
+    <h2>관리자 페이지</h2>
+</div>
+<div class="menu-wrapper">
+    <div class="menu-item">
+        <p><a href="/admin/category">카테고리 관리</a></p>
+    </div>
+    <div class="menu-item">
+        <p><a href="/admin/category">관리</a></p>
+    </div>
+</div>
+<div class="category-editor">
+    <div class="category">
+        <div class="category-editor_add">
+            <div>새로운 카테고리</div>
+            <input id="category0" type="text">
+            <button class="add-button" onclick="sendCreateRequest(0)">추가하기</button>
+        </div>
+    </div>
+</div>
+<script src="/js/admin.js"></script>
+
+</body>
+</html>

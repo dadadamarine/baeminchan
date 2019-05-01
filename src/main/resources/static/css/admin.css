@@ -1,0 +1,68 @@
+.title  {
+    font-size:2rem;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+.menu-wrapper {
+    text-align: center;
+    border-right:2px solid black;
+    float: left;
+    width:150px;
+    height:100%;
+}
+.menu-item {
+    height:40px;
+    width:100%;
+    border-bottom: 1px solid black;
+    font-size:15px;
+
+}
+.category{
+    border-bottom: 2px solid gray;
+}
+.menu-item a{
+    color:black;
+    text-decoration: none;
+}
+.category-editor{
+    float: left;
+    width:calc(100% - 153px);
+}
+.category-editor_add{
+    height:60px;
+    text-align: center;
+    border-bottom:1px solid rgba(0, 0, 0, 0.1);
+}
+.category-editor_add div{
+    font-weight: bold;
+    font-size:1.5rem;
+    margin-left: 20px;
+}
+.category-editor_add input{
+    width:50%;
+    height:30px;
+}
+.category-editor_add .add-button{
+    width:20%;
+    height:30px;
+}
+.category-editor_contents{
+    overflow: hidden;
+}
+.category-list_item{
+    width:150px;
+    float:left;
+    margin-bottom: 10px;
+}
+
+.delete-button{
+    cursor: pointer;
+    margin-left:20px;
+    border: none;
+    background-image:url("https://image.flaticon.com/icons/svg/69/69324.svg");
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    width:15px;
+    height:15px;
+}
