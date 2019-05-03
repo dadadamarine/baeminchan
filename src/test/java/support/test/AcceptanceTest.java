@@ -21,11 +21,11 @@ public abstract class AcceptanceTest {
     @Autowired
     private AccountRepository accountRepository;
 
-    public TestRestTemplate template(){
+    public TestRestTemplate template() {
         return testRestTemplate;
     }
 
-    public TestRestTemplate basicAuthTemplate(){
+    public TestRestTemplate basicAuthTemplate() {
         return basicAuthTemplate(getDefaultManager());
     }
 
@@ -33,7 +33,7 @@ public abstract class AcceptanceTest {
         return accountRepository.findByUserId(DEFAULT_MANAGER_ACCOUNT_EMAIL).orElseThrow(UnAuthenticationException::new);
     }
 
-    public TestRestTemplate basicAuthTemplate(Account account){
+    public TestRestTemplate basicAuthTemplate(Account account) {
         return testRestTemplate.withBasicAuth(account.getUserId(), account.getPassword());
     }
 

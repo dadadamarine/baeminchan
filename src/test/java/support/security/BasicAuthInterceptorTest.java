@@ -3,17 +3,13 @@ package support.security;
 import codesquad.domain.Account;
 import codesquad.domain.AccountRepository;
 import codesquad.intercepter.BasicAuthInterceptor;
-import codesquad.service.AccountService;
 import codesquad.util.SessionUtils;
-import codesquad.web.dto.AccountLoginDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Base64;
 import java.util.Optional;
