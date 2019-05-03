@@ -23,7 +23,7 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String base64Credentials;
-        try{
+        try {
             base64Credentials = getEncodedCredentials(request);
             String[] credentialValues = getDecodedCredentials(base64Credentials);
             String userId = credentialValues[0];
@@ -32,14 +32,14 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
             log.debug("password : {}", password);
             login(request, userId, password);
             return true;
-        }catch (UnAuthenticationException e){
+        } catch (UnAuthenticationException e) {
             return true;
         }
     }
 
-    public String getEncodedCredentials(HttpServletRequest request){
+    public String getEncodedCredentials(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
-        if(authorization==null || !authorization.startsWith("Basic")){
+        if (authorization == null || !authorization.startsWith("Basic")) {
             throw new UnAuthenticationException();
         }
         return authorization.substring("Basic".length()).trim();
@@ -47,13 +47,13 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
 
     public String[] getDecodedCredentials(String base64Credentials) {
         String credentials = new String(Base64.getDecoder().decode(base64Credentials), Charset.forName("UTF-8"));
-        return credentials.split(":",2);
+        return credentials.split(":", 2);
     }
 
     public void login(HttpServletRequest request, String userId, String password) {
         Account account = accountRepository.findByUserId(userId).orElseThrow(UnAuthenticationException::new);
 
-        if(account.matchPassword(password)){
+        if (account.matchPassword(password)) {
             request.getSession().setAttribute(SessionUtils.USER_SESSION_KEY, account);
         }
     }
