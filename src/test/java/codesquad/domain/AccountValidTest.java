@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountValidTest {
 
-    private static final Logger log = LoggerFactory.getLogger(AccountTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountValidTest.class);
 
     private static Validator validator;
 
@@ -25,7 +25,7 @@ public class AccountValidTest {
 
     @Test
     public void emptyUserId() {
-        Account user = new Account("", "12345678", "testName", "test@gmail.com");
+        Account user = new Account("", "!Ta12345678", "testName", "test@gmail.com");
         Set<ConstraintViolation<Account>> constraintViolations = validator.validate(user);
         assertThat(constraintViolations.size()).isEqualTo(1);
 

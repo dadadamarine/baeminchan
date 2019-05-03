@@ -1,4 +1,4 @@
-package codesquad.configration;
+package codesquad.configuration;
 
 import codesquad.intercepter.AdminInterceptor;
 
@@ -39,6 +39,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Profile("test")
     public class TestWebMvcConfig extends WebMvcConfig{
 
+        @Bean
+        public BasicAuthInterceptor basicAuthInterceptor(){
+            return new BasicAuthInterceptor();
+        }
+
         @Override
         public void addInterceptors(InterceptorRegistry registry) {
             registry.addInterceptor(basicAuthInterceptor());
@@ -51,13 +56,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public BasicAuthInterceptor basicAuthInterceptor(){
-        return new BasicAuthInterceptor();
+    public AdminInterceptor adminInterceptor(){
+        return new AdminInterceptor();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AdminInterceptor())
+        registry.addInterceptor(adminInterceptor())
                 .addPathPatterns("/admin");
     }
 }

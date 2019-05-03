@@ -32,7 +32,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
@@ -120,14 +119,6 @@ public class ApiMenuCategoryControllerTest {
         //given
         when(menuCategoryService.deleteById(1l))
                 .thenReturn(new MenuCategory());
-        when(managerArgumentResolver.supportsParameter((MethodParameter) notNull()))
-                .thenReturn(true);
-        when(managerArgumentResolver.resolveArgument(
-                (MethodParameter) notNull()
-                , (ModelAndViewContainer) notNull()
-                , (NativeWebRequest) notNull()
-                , (WebDataBinderFactory) notNull()
-        )).thenReturn(manager);
 
         //when
         MockHttpServletResponse response = mockMvc.perform(

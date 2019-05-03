@@ -24,7 +24,7 @@ public class MenuCategoryRepositoryTest {
     public void defualt_test() {
         MenuCategory menuCategory = new MenuCategory(1L, "최상");
         categoryRepository.save(menuCategory);
-        assertThat(categoryRepository.findAll().size()).isEqualTo(19);
+        assertThat(categoryRepository.findAll().size()).isEqualTo(18);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class MenuCategoryRepositoryTest {
         categoryRepository.delete(fstCategory);
 
         log.info("남은 카테고리 : '{}'", categoryRepository.findAll());
-        assertThat(categoryRepository.findAll().size()).isEqualTo(14);
+        assertThat(categoryRepository.findAll().size()).isEqualTo(13);
 
     }
 }
