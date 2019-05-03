@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AcceptanceTest {
+public abstract class AcceptanceTest {
     private static final String DEFAULT_MANAGER_ACCOUNT_EMAIL = "admin@admin.com";
 
     @Autowired
