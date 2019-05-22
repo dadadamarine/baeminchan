@@ -37,6 +37,7 @@ public class ApiMemberController {
     @PostMapping("/login")
     public ResponseEntity<Void> login(HttpSession session, @Valid @RequestBody AccountLoginDTO accountLoginDTO) {
         session.setAttribute(SessionUtils.USER_SESSION_KEY, accountService.findAccount(accountLoginDTO));
+
         return makeDefaultResponseEntity("/", HttpStatus.OK);
     }
 
