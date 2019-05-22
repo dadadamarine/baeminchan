@@ -31,6 +31,7 @@ public class ApiMemberController {
     @PostMapping("")
     public ResponseEntity<Void> createMember(@Valid @RequestBody AccountRegistrationDTO accountRegistrationDTO) {
         accountService.save(accountRegistrationDTO);
+
         return makeDefaultResponseEntity("/login", HttpStatus.CREATED);
     }
 
