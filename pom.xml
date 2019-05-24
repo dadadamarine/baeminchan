@@ -8,7 +8,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>webservice</name>
+	<name>webApi</name>
 	<description>배민찬 서비스</description>
 
 	<parent>
