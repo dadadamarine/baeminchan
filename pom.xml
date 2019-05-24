@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>kr.codesquad</groupId>
-	<artifactId>baeminchan</artifactId>
+	<artifactId>webApi</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>webapi</name>
+	<name>webservice</name>
 	<description>배민찬 서비스</description>
 
 	<parent>
