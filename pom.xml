@@ -8,7 +8,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>baeminchan</name>
+	<name>webapi</name>
 	<description>배민찬 서비스</description>
 
 	<parent>
