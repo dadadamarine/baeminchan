@@ -2,10 +2,12 @@ package codesquad.configration;
 
 import codesquad.intercepter.AdminInterceptor;
 
+import codesquad.intercepter.BasicAuthInterceptor;
 import codesquad.security.AdminAccountHandlerMethodArgumentResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,9 +35,26 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new AdminAccountHandlerMethodArgumentResolver();
     }
 
+    @Configuration
+    @Profile("test")
+    public class TestWebMvcConfig extends WebMvcConfig{
+
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(new AdminInterceptor())
+                    .addPathPatterns("/admin");
+            registry.addInterceptor(basicAuthInterceptor());
+        }
+    }
+
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(managerAccountHandlerMethodArgumentResolver());
+    }
+
+    @Bean
+    public BasicAuthInterceptor basicAuthInterceptor(){
+        return new BasicAuthInterceptor();
     }
 
     @Override

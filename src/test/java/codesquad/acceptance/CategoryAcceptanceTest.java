@@ -23,14 +23,12 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class CategoryAcceptanceTest extends AcceptanceTest {
-    //TODO : BasicAuthorizationInterceptor를 통한 AcceptanceTest구현
     private static Logger log = LoggerFactory.getLogger(CategoryAcceptanceTest.class);
 
     @Autowired
     private MenuCategoryRepository menuCategoryRepository;
 
     private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 
     @Test
     public void index_test() {
@@ -52,7 +50,8 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 자식");
         category.setParentId(1l);
-        ResponseEntity<MenuCategory> response = sendPost("/api/menuCategory", category, MenuCategory.class);
+        ResponseEntity<MenuCategory> response =
+                sendPostWithDefaultManager("/api/menuCategory", category, MenuCategory.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody().getName()).isEqualTo("새로운 자식");
@@ -62,7 +61,8 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     public void api_create_category_test() {
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 카테고리");
-        ResponseEntity<MenuCategory> response = sendPost("/api/menuCategory", category, MenuCategory.class);
+        ResponseEntity<MenuCategory> response =
+                sendPostWithDefaultManager("/api/menuCategory", category, MenuCategory.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody().getName()).isEqualTo("새로운 카테고리");
@@ -72,9 +72,10 @@ public class CategoryAcceptanceTest extends AcceptanceTest {
     public void api_delete_test() {
         MenuCategoryDTO category = new MenuCategoryDTO();
         category.setName("새로운 삭제된 카테고리");
-        ResponseEntity<MenuCategory> responseByPost = sendPost("/api/menuCategory", category, MenuCategory.class);
-
-        ResponseEntity<MenuCategory> responseByDelete = sendDelete("/api/menuCategory/" + responseByPost.getBody().getId(), MenuCategory.class);
+        ResponseEntity<MenuCategory> responseByPost =
+                sendPostWithDefaultManager("/api/menuCategory", category, MenuCategory.class);
+        ResponseEntity<MenuCategory> responseByDelete =
+                sendDeleteWithDefaultManager("/api/menuCategory/" + responseByPost.getBody().getId(), MenuCategory.class);
 
         assertThat(responseByDelete.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseByDelete.getBody().getName()).isEqualTo("새로운 삭제된 카테고리");
